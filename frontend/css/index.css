@@ -1,0 +1,334 @@
+:root {
+    --dark: #0a1931;
+    --blue: #5ba4cf;
+    --light-blue: #eef6ff;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--light-blue);
+    color: var(--dark);
+    overflow-x: hidden;
+}
+
+/* NAVBAR FLUIDA */
+.navbar {
+    background-color: var(--white);
+    height: 80px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    width: 100%;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo { 
+    text-decoration: none; 
+    display: flex; align-items: 
+    center; 
+    gap: 10px; 
+}
+.logo-icon i {
+     font-size: 2rem; 
+     color: var(--blue); 
+    }
+.brand-name { 
+    display: block; 
+    font-size: 1.4rem; 
+    font-weight: 800; 
+    color: var(--dark); }
+.brand-sub { 
+    font-size: 0.6rem; 
+    color: var(--blue); text-transform: uppercase; 
+    font-weight: 700; 
+    letter-spacing: 1px; 
+}
+
+.link-login {
+    text-decoration: none; 
+    color: var(--dark); 
+    font-weight: 600; 
+    margin-right: 30px; 
+}
+.btn-nav { 
+    text-decoration: none; 
+    background: var(--dark); 
+    color: white; 
+    padding: 12px 24px; 
+    border-radius: 6px; 
+    font-weight: 700; 
+    font-size: 0.9rem;
+}
+
+/* --- SECCIÓN DEL ESLOGAN (EL CAMBIO PRO) --- */
+.hero-section {
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.main-slogan {
+    font-size: 4.5rem; /* Tamaño masivo para impacto */
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -3px;
+    margin-bottom: 40px;
+}
+
+.text-focus {
+    color: var(--blue);
+    position: relative;
+}
+
+.text-accent {
+    color: var(--dark);
+    font-weight: 400; /* Contraste de grosor: una palabra gruesa, otra fina */
+    font-style: italic;
+}
+
+.sub-slogan-wrapper {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 80px;
+}
+
+.sub-slogan {
+    background: var(--blue);
+    color: white;
+    padding: 15px 40px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-radius: 4px;
+}
+
+.floating-tag {
+    position: absolute;
+    bottom: -25px;
+    right: -20px;
+    background: var(--dark);
+    color: white;
+    padding: 8px 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    transform: rotate(2deg); 
+    border-radius: 4px;
+}
+
+.image-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto 60px;
+}
+
+.img-card {
+    flex: 1;
+    height: 300px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.img-card:hover { transform: scale(1.05) translateY(-10px); }
+.img-card img { width: 100%; height: 100%; object-fit: cover; }
+
+.btn-primary-pro {
+    background: var(--dark);
+    color: white;
+    border: none;
+    padding: 22px 50px;
+    font-size: 1.2rem;
+    font-weight: 800;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 10px 20px rgba(10,25,49,0.2);
+}
+
+.btn-primary-pro:hover {
+    background: var(--blue);
+    transform: translateY(-3px);
+}
+
+.footer-pro {
+    background: var(--white);
+    padding: 40px;
+    border-top: 1px solid var(--border);
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.f-logo { font-weight: 800; color: var(--dark); display: flex; align-items: center; gap: 8px; }
+.f-logo i { color: var(--blue); }
+
+.social-pills a {
+    color: var(--dark);
+    font-size: 1.4rem;
+    margin-left: 20px;
+    transition: 0.3s;
+}
+
+.social-pills a:hover { color: var(--blue); }
+
+.d-none { display: none; } /* Clase para ocultar campos */
+
+.input-inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-inner i {
+    position: absolute;
+    left: 15px;
+    color: #5ba4cf;
+    font-size: 1.1rem;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 14px 15px 14px 45px; 
+    border: 2px solid #f1f5f9;
+    border-radius: 12px;
+    background: #f8fafc;
+    font-family: inherit;
+    transition: 0.3s;
+}
+
+.input-field input:focus {
+    outline: none;
+    border-color: #5ba4cf;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(91, 164, 207, 0.1);
+}
+
+.modal-footer-text {
+    margin-top: 25px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.modal-footer-text a {
+    color: #5ba4cf;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.btn-submit-modal:hover {
+    background: #5ba4cf;
+    transform: translateY(-2px);
+}
+
+
+.modal-overlay {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(10, 25, 49, 0.7); 
+    backdrop-filter: blur(8px); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; 
+    
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-card {
+    background: var(--white);
+    padding: 40px;
+    border-radius: 24px;
+    width: 90%;
+    max-width: 450px;
+    position: relative; 
+    transform: translateY(20px);
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.modal-overlay.active .modal-card {
+    transform: translateY(0);
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--dark);
+    opacity: 0.5;
+}
+
+.close-modal:hover { opacity: 1; }
+
+.modal-header-pro {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.modal-header-pro i {
+    font-size: 2.5rem;
+    color: var(--blue);
+}
+
+.modal-header-pro h2 {
+    font-size: 1.8rem;
+    font-weight: 800;
+}
+
+.modal-header-pro h2 span {
+    color: var(--blue);
+    font-weight: 400;
+    font-style: italic;
+}
+
+.btn-submit-modal {
+    width: 100%;
+    background: var(--dark);
+    color: white;
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: 0.3s;
+}

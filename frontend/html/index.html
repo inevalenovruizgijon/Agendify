@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendify | Tu tiempo, bajo control</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/index.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon"><i class="ri-calendar-check-fill"></i></div>
+                <div class="logo-text">
+                    <span class="brand-name">Agendify</span>
+                    <span class="brand-sub">Agencia Digital Moderna</span>
+                </div>
+            </a>
+            <div class="nav-auth">
+                <a href="#" class="link-login">Login</a>
+                <a href="#" class="btn-nav">Empezar Gratis</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="hero-section">
+        <div class="slogan-container">
+            <h1 class="main-slogan">
+                Ordena tu <span class="text-focus">mundo</span>,<br>
+                <span class="text-accent">acelera tu meta.</span>
+            </h1>
+            
+            <div class="sub-slogan-wrapper">
+                <h2 class="sub-slogan">Domina tu tiempo con Agendify</h2>
+                <div class="floating-tag">Y así conquistarás tu vida</div>
+            </div>
+        </div>
+
+        <div class="image-grid">
+            <div class="img-card card-1">
+                <img src="https://images.unsplash.com/photo-1506784919141-93b4827bb501?auto=format&fit=crop&w=600" alt="Work">
+            </div>
+            <div class="img-card card-2">
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600" alt="Meeting">
+            </div>
+            <div class="img-card card-3">
+                <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=600" alt="Planning">
+            </div>
+        </div>
+
+        <div class="cta-container">
+            <button class="btn-primary-pro">
+                Explorar Agendify <i class="ri-arrow-right-up-line"></i>
+            </button>
+        </div>
+    </main>
+
+    <footer class="footer-pro">
+        <div class="footer-content">
+            <div class="footer-left">
+                <div class="f-logo"><i class="ri-calendar-check-fill"></i> Agendify</div>
+                <p>© 2026 Crafted for productivity.</p>
+            </div>
+            <div class="footer-right">
+                <div class="social-pills">
+                    <a href="#"><i class="ri-instagram-fill"></i></a>
+                    <a href="#"><i class="ri-twitter-x-fill"></i></a>
+                    <a href="#"><i class="ri-linkedin-box-fill"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="authModal">
+    <div class="modal-card">
+        <button class="close-modal" id="closeAuth"><i class="ri-close-line"></i></button>
+        
+        <div class="modal-body">
+            <div class="modal-header-pro">
+                <i class="ri-calendar-check-fill"></i>
+                <h2 id="modalTitle">Bienvenido de <span>nuevo</span></h2>
+                <p id="modalSubtitle">Ingresa tus datos para continuar</p>
+            </div>
+
+            <form class="modal-form" id="authForm">
+                <div class="input-field d-none" id="groupName">
+                    <label>Nombre Completo</label>
+                    <div class="input-inner">
+                        <i class="ri-user-3-line"></i>
+                        <input type="text" name="nombre" placeholder="Tu nombre">
+                    </div>
+                </div>
+
+                <div class="input-field">
+                    <label>Email</label>
+                    <div class="input-inner">
+                        <i class="ri-mail-line"></i>
+                        <input type="email" name="email" placeholder="tu@ejemplo.com" required>
+                    </div>
+                </div>
+
+                <div class="input-field">
+                    <label>Contraseña</label>
+                    <div class="input-inner">
+                        <i class="ri-lock-2-line"></i>
+                        <input type="password" name="password" placeholder="••••••••" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit-modal" id="btnSubmit">Entrar a Agendify</button>
+            </form>
+            
+            <div class="modal-footer-text">
+                <span id="footerQuestion">¿No tienes cuenta?</span> 
+                <a href="#" id="toggleAuth">Regístrate</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../script/script.js"></script>
+</body>
+</html>
