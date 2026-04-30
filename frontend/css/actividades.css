@@ -1,0 +1,88 @@
+/* Corrección de Fuentes y Layout */
+.calendar-main {
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+}
+
+.activities-layout {
+    display: grid !important;
+    grid-template-columns: 1.5fr 1fr 1fr !important;
+    gap: 30px;
+    margin-top: 20px;
+    align-items: start;
+}
+
+/* Forzar el estilo de las Cards */
+.container-white {
+    background: #ffffff !important;
+    border-radius: 20px !important;
+    padding: 25px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+    border: 1px solid rgba(0,0,0,0.05) !important;
+}
+
+/* Estilo de los items de Pendientes */
+.activity-item {
+    background: #e2e8f0 !important;
+    border-radius: 12px !important;
+    padding: 15px 20px !important;
+    margin-bottom: 12px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+}
+
+.activity-name {
+    font-weight: 700 !important;
+    color: #0a1931 !important;
+}
+
+/* Badges */
+.badge {
+    padding: 4px 12px !important;
+    border-radius: 8px !important;
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    text-transform: uppercase;
+}
+
+.badge.today {
+    background: #5ba4cf !important;
+    color: white !important;
+}
+
+/* La columna de Próximas con el lateral azul */
+.upcoming-split {
+    display: flex !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    min-height: 200px;
+}
+
+.upcoming-info {
+    flex: 1;
+    padding: 20px !important;
+    color: #0a1931 !important;
+    font-weight: 600;
+}
+
+.upcoming-sidebar {
+    width: 60px;
+    background: #5ba4cf !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    color: white !important;
+    font-weight: 800;
+}
+
+/* Botón Nuevo Evento (El negro de la sidebar) */
+.btn-add-event {
+    background: #0a1931 !important;
+    color: white !important;
+    border: none !important;
+    padding: 12px 24px !important;
+    border-radius: 12px !important;
+    font-weight: 700 !important;
+    cursor: pointer;
+}

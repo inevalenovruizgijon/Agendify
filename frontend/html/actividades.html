@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividades | Agendify</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/actividades.css">
+</head>
+
+<body>
+
+    <main class="calendar-main">
+        <header class="calendar-header">
+            <div class="header-info">
+                <h1>Actividades <span>2026</span></h1>
+            </div>
+            <button class="btn-add-event">
+                <i class="ri-add-line"></i>
+                <span>Nuevo evento</span>
+            </button>
+        </header>
+
+        <section class="activities-layout">
+            <div class="activity-column">
+                <h2 class="column-title">Pendientes</h2>
+                <div class="column-content container-white">
+                    <div class="activity-item">
+                        <span class="activity-name">Estudiar Examen</span>
+                        <div class="activity-meta">
+                            <span class="time">16:00 - 17:30</span>
+                            <span class="badge today">Hoy</span>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <span class="activity-name">Barbacoa con amigos</span>
+                        <div class="activity-meta">
+                            <span class="time">20:00</span>
+                            <span class="badge today">Hoy</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-column">
+                <h2 class="column-title">Próximas</h2>
+                <div class="column-content container-white upcoming-split">
+                    <div class="upcoming-info">
+                        <p>Examen Diseño</p>
+                        <p>Cumpleaños David García</p>
+                    </div>
+                    <div class="upcoming-sidebar">
+                        <span>13/12</span>
+                        <span>07/09</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="activity-column">
+                <h2 class="column-title">Realizadas</h2>
+                <div class="column-content container-white">
+                    <ul class="done-list">
+                        <li><i class="ri-checkbox-circle-line"></i> Actividades PHP</li>
+                        <li><i class="ri-checkbox-circle-line"></i> Estudiar para examen</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <footer class="calendar-footer">
+            <a href="#" class="view-list">
+                <i class="ri-arrow-left-line"></i> Volver a la vista de calendario
+            </a>
+        </footer>
+    </main>
+
+</body>
+
+</html>
