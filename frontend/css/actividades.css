@@ -1,183 +1,66 @@
-/* --- CONFIGURACIÓN GENERAL --- */
-body {
-    background-color: #f8fafc;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    margin: 0;
-    color: #0a1931;
-}
-
-.calendar-main {
-    padding: 40px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* --- HEADER --- */
-.calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 40px;
-}
-
-.calendar-header h1 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    letter-spacing: -1.5px;
-}
-
-.calendar-header h1 span {
-    color: #5ba4cf;
-    font-weight: 400;
-}
-
-/* --- BOTÓN NUEVO EVENTO --- */
-.btn-add-event {
-    background: #0a1931;
-    color: white;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.btn-add-event:hover {
-    background: #162c4e;
-    transform: translateY(-2px);
-}
-
-/* --- LAYOUT DE COLUMNAS --- */
 .activities-layout {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-bottom: 40px;
+    gap: 25px;
+    flex: 1; /* Ocupa el espacio entre header y footer */
+    min-height: 0; /* Evita desbordamiento */
 }
 
-.column-title {
-    font-size: 1.2rem;
-    font-weight: 800;
-    margin-bottom: 20px;
-    color: #0a1931;
-}
-
-/* --- TARJETAS BLANCAS (Contenedores) --- */
-.container-white {
-    background: white;
-    border-radius: 24px;
-    padding: 25px;
-    min-height: 400px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.03);
-    border: 1px solid rgba(226, 232, 240, 0.8);
-}
-
-/* --- ITEMS DE ACTIVIDAD --- */
-.activity-item {
-    background: #f1f5f9;
-    padding: 15px 20px;
-    border-radius: 16px;
-    margin-bottom: 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.activity-name {
-    font-weight: 700;
-    font-size: 1rem;
-}
-
-.activity-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.time {
-    font-size: 0.85rem;
-    color: #64748b;
-    font-weight: 600;
-}
-
-/* BADGES */
-.badge {
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 800;
-    text-transform: uppercase;
-}
-
-.badge.today {
-    background: #cbd5e1;
-    color: white;
-}
-
-/* --- COLUMNA PRÓXIMAS (Split) --- */
-.upcoming-split {
-    display: flex;
-    justify-content: space-between;
-}
-
-.upcoming-info p {
-    font-weight: 700;
-    margin-bottom: 15px;
-}
-
-.upcoming-sidebar {
+.activity-column {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    color: #5ba4cf;
-    font-weight: 700;
-    border-left: 2px solid #e2e8f0;
-    padding-left: 15px;
 }
 
-/* --- LISTA REALIZADAS --- */
-.done-list {
-    list-style: none;
-    padding: 0;
-}
-
-.done-list li {
+.column-header {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 12px;
-    padding: 12px 0;
-    color: #94a3b8;
-    text-decoration: line-through;
-    font-weight: 600;
+    padding: 0 5px;
 }
 
-.done-list i {
-    color: #10b981; /* Verde éxito */
-    font-size: 1.2rem;
-    text-decoration: none;
+.column-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--sidebar-bg);
 }
 
-/* --- ENLACE VOLVER (Corregido) --- */
-.view-list {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    color: #0a1931;
-    text-decoration: none;
+.count-badge {
+    background: #e2e8f0;
+    color: #64748b;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
     font-weight: 700;
-    font-size: 1rem;
-    transition: all 0.2s;
 }
 
-.view-list i {
-    font-size: 1.2rem;
+.column-content {
+    flex: 1;
+    overflow-y: auto; /* Permite scroll solo dentro de la columna */
+    padding: 15px;
+    border-radius: 20px;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
 }
 
-.view-list:hover {
-    color: #5ba4cf;
-    transform: translateX(-5px);
+/* Estilo para cuando no hay nada */
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: #94a3b8;
+    text-align: center;
+    gap: 10px;
+}
+
+.empty-state i {
+    font-size: 2.5rem;
+    opacity: 0.5;
+}
+
+.empty-state p {
+    font-size: 0.9rem;
+    font-weight: 600;
 }

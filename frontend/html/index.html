@@ -20,8 +20,8 @@
                 </div>
             </a>
             <div class="nav-auth">
-                <a href="#" class="link-login">Login</a>
-                <a href="#" class="btn-nav">Empezar Gratis</a>
+                <a href="#" class="link-login" id="navLogin">Login</a>
+                <a href="#" class="btn-nav" id="navRegister">Empezar Gratis</a>
             </div>
         </div>
     </nav>
@@ -74,52 +74,83 @@
         </div>
     </footer>
 
+    <!-- MODAL AJUSTADO PARA PHP -->
     <div class="modal-overlay" id="authModal">
-    <div class="modal-card">
-        <button class="close-modal" id="closeAuth"><i class="ri-close-line"></i></button>
-        
-        <div class="modal-body">
-            <div class="modal-header-pro">
-                <i class="ri-calendar-check-fill"></i>
-                <h2 id="modalTitle">Bienvenido de <span>nuevo</span></h2>
-                <p id="modalSubtitle">Ingresa tus datos para continuar</p>
-            </div>
-
-            <form class="modal-form" id="authForm">
-                <div class="input-field d-none" id="groupName">
-                    <label>Nombre Completo</label>
-                    <div class="input-inner">
-                        <i class="ri-user-3-line"></i>
-                        <input type="text" name="nombre" placeholder="Tu nombre">
-                    </div>
-                </div>
-
-                <div class="input-field">
-                    <label>Email</label>
-                    <div class="input-inner">
-                        <i class="ri-mail-line"></i>
-                        <input type="email" name="email" placeholder="tu@ejemplo.com" required>
-                    </div>
-                </div>
-
-                <div class="input-field">
-                    <label>Contraseña</label>
-                    <div class="input-inner">
-                        <i class="ri-lock-2-line"></i>
-                        <input type="password" name="password" placeholder="••••••••" required>
-                    </div>
-                </div>
-
-                <button type="submit" class="btn-submit-modal" id="btnSubmit">Entrar a Agendify</button>
-            </form>
+        <div class="modal-card">
+            <button class="close-modal" id="closeAuth"><i class="ri-close-line"></i></button>
             
-            <div class="modal-footer-text">
-                <span id="footerQuestion">¿No tienes cuenta?</span> 
-                <a href="#" id="toggleAuth">Regístrate</a>
+            <div class="modal-body">
+                <div class="modal-header-pro">
+                    <i class="ri-calendar-check-fill"></i>
+                    <h2 id="modalTitle">Bienvenido de <span>nuevo</span></h2>
+                    <p id="modalSubtitle">Ingresa tus datos para continuar</p>
+                </div>
+
+                <!-- IMPORTANTE: El action se cambiará dinámicamente con JS -->
+                <!-- El enctype es para permitir subir la foto de perfil -->
+                <form class="modal-form" id="authForm" method="POST" action="../../backend/auth/login.php" enctype="multipart/form-data">
+                    
+                    <div class="input-field d-none" id="groupName">
+                        <label>Nombre Completo</label>
+                        <div class="input-inner">
+                            <i class="ri-user-3-line"></i>
+                            <input type="text" name="nombre" placeholder="Tu nombre">
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <label>Email</label>
+                        <div class="input-inner">
+                            <i class="ri-mail-line"></i>
+                            <input type="email" name="email" placeholder="tu@ejemplo.com" required>
+                        </div>
+                    </div>
+
+                    <div class="input-field">
+                        <label>Contraseña</label>
+                        <div class="input-inner">
+                            <i class="ri-lock-2-line"></i>
+                            <input type="password" name="password" placeholder="••••••••" required>
+                        </div>
+                    </div>
+
+                    <!-- Input de foto oculto por defecto (solo para registro) -->
+                    <div class="input-field d-none" id="groupFoto">
+                        <label>Foto de perfil (opcional)</label>
+                        <div class="input-inner">
+                            <i class="ri-image-add-line"></i>
+                            <input type="file" name="foto" accept="image/*">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit-modal" id="btnSubmit">Entrar a Agendify</button>
+                </form>
+                
+                <div class="modal-footer-text">
+                    <span id="footerQuestion">¿No tienes cuenta?</span> 
+                    <a href="#" id="toggleAuth">Regístrate</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<script src="../js/script.js"></script>
+
+    <script src="../js/script.js"></script>
+    <script>
+        // Lógica extra para cambiar el destino del formulario según el modo
+        const authForm = document.getElementById('authForm');
+        const toggleAuth = document.getElementById('toggleAuth');
+        const groupFoto = document.getElementById('groupFoto');
+
+        toggleAuth.addEventListener('click', () => {
+            const isLogin = authForm.action.includes('login.php');
+            if (isLogin) {
+                authForm.action = '../../backend/auth/registro.php';
+                groupFoto.classList.remove('d-none');
+            } else {
+                authForm.action = '../../backend/auth/login.php';
+                groupFoto.classList.add('d-none');
+            }
+        });
+    </script>
 </body>
 </html>

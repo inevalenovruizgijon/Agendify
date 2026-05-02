@@ -1,82 +1,146 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actividades | Agendify</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap"
-        rel="stylesheet">
+    <!-- Fuentes e Iconos -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/calendar.css"> <!-- Reutilizamos el CSS base -->
     <link rel="stylesheet" href="../css/actividades.css">
 </head>
+<body class="calendar-page">
 
-<body>
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="sidebar-logo">
+            <i class="ri-calendar-check-fill"></i>
+            <div class="logo-text">
+                <span class="brand-name">Agendify</span>
+                <span class="brand-sub">Agencia Digital</span>
+            </div>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="calendar.html" class="nav-item">
+                <i class="ri-calendar-line"></i> <span>Calendario</span>
+            </a>
+            <a href="actividades.html" class="nav-item active">
+                <i class="ri-list-check"></i> <span>Actividades</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="ri-user-line"></i> <span>Perfil</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="index.html" class="nav-item logout">
+                <i class="ri-logout-box-line"></i> <span>Cerrar sesión</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <p>© 2026 Agendify Team</p>
+        </div>
+    </aside>
 
+    <!-- CONTENIDO PRINCIPAL -->
     <main class="calendar-main">
         <header class="calendar-header">
             <div class="header-info">
-                <h1>Actividades <span>2026</span></h1>
+                <h1>Listado de <span>Actividades</span></h1>
             </div>
-            <button class="btn-add-event">
+            <button class="btn-add-event" id="openModalBtn">
                 <i class="ri-add-line"></i>
                 <span>Nuevo evento</span>
             </button>
         </header>
 
+        <!-- Layout de Columnas (Kanban Style) -->
         <section class="activities-layout">
+            
+            <!-- Columna Pendientes -->
             <div class="activity-column">
-                <h2 class="column-title">Pendientes</h2>
-                <div class="column-content container-white">
-                    <div class="activity-item">
-                        <span class="activity-name">Estudiar Examen</span>
-                        <div class="activity-meta">
-                            <span class="time">16:00 - 17:30</span>
-                            <span class="badge today">Hoy</span>
-                        </div>
-                    </div>
-                    <div class="activity-item">
-                        <span class="activity-name">Barbacoa con amigos</span>
-                        <div class="activity-meta">
-                            <span class="time">20:00</span>
-                            <span class="badge today">Hoy</span>
-                        </div>
+                <div class="column-header">
+                    <h2 class="column-title">Pendientes</h2>
+                    <span class="count-badge" id="count-pending">0</span>
+                </div>
+                <div class="column-content container-white" id="list-pending">
+                    <!-- JS inyectará las actividades aquí -->
+                    <div class="empty-state">
+                        <i class="ri-inbox-line"></i>
+                        <p>No hay tareas pendientes</p>
                     </div>
                 </div>
             </div>
 
+            <!-- Columna Próximas -->
             <div class="activity-column">
-                <h2 class="column-title">Próximas</h2>
-                <div class="column-content container-white upcoming-split">
-                    <div class="upcoming-info">
-                        <p>Examen Diseño</p>
-                        <p>Cumpleaños David García</p>
-                    </div>
-                    <div class="upcoming-sidebar">
-                        <span>13/12</span>
-                        <span>07/09</span>
+                <div class="column-header">
+                    <h2 class="column-title">Próximas</h2>
+                    <span class="count-badge" id="count-upcoming">0</span>
+                </div>
+                <div class="column-content container-white" id="list-upcoming">
+                    <div class="empty-state">
+                        <i class="ri-calendar-event-line"></i>
+                        <p>Sin eventos próximos</p>
                     </div>
                 </div>
             </div>
 
+            <!-- Columna Realizadas -->
             <div class="activity-column">
-                <h2 class="column-title">Realizadas</h2>
-                <div class="column-content container-white">
-                    <ul class="done-list">
-                        <li><i class="ri-checkbox-circle-line"></i> Actividades PHP</li>
-                        <li><i class="ri-checkbox-circle-line"></i> Estudiar para examen</li>
-                    </ul>
+                <div class="column-header">
+                    <h2 class="column-title">Realizadas</h2>
+                    <span class="count-badge" id="count-done">0</span>
+                </div>
+                <div class="column-content container-white" id="list-done">
+                    <div class="empty-state">
+                        <i class="ri-checkbox-circle-line"></i>
+                        <p>Aún no has completado nada</p>
+                    </div>
                 </div>
             </div>
         </section>
 
         <footer class="calendar-footer">
-            <a href="#" class="view-list">
+            <a href="calendar.html" class="view-list">
                 <i class="ri-arrow-left-line"></i> Volver a la vista de calendario
             </a>
         </footer>
     </main>
 
-</body>
+    <!-- MODAL NUEVO EVENTO (Mismo que en calendario) -->
+    <div class="modal-overlay" id="eventModal">
+        <div class="modal-card event-card">
+            <div class="event-modal-header">
+                <h2>Nuevo evento</h2>
+                <button class="close-modal" id="closeEventModal"><i class="ri-close-circle-line"></i></button>
+            </div>
+            <form class="event-form" id="newEventForm">
+                <div class="input-group">
+                    <label>Título *</label>
+                    <input type="text" placeholder="Nombre del evento" required>
+                </div>
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Fecha *</label>
+                        <input type="date" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Hora *</label>
+                        <input type="time" required>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Descripción</label>
+                    <textarea placeholder="Detalles del evento..." rows="3"></textarea>
+                </div>
+                <div class="event-modal-actions">
+                    <button type="submit" class="btn-create">Crear Evento</button>
+                    <button type="button" class="btn-cancel" id="btnCancelEvent">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
+    <script src="../js/actividades.js"></script>
+</body>
 </html>
