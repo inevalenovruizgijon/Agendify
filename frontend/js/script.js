@@ -1,65 +1,64 @@
-const modal = document.getElementById('authModal');
-const btnClose = document.getElementById('closeAuth');
-const toggleBtn = document.getElementById('toggleAuth');
-
-// Elementos que cambian dentro del modal
-const modalTitle = document.getElementById('modalTitle');
-const modalSubtitle = document.getElementById('modalSubtitle');
-const groupName = document.getElementById('groupName');
-const btnSubmit = document.getElementById('btnSubmit');
-const footerQuestion = document.getElementById('footerQuestion');
-
-let isLogin = true;
-
-// Función única para cambiar la apariencia del modal
 function configurarModal(queremosLogin) {
-    isLogin = queremosLogin;
-    
-    if (isLogin) {
+    const authForm = document.getElementById('authForm');
+    const modalTitle = document.getElementById('modalTitle');
+    const btnSubmit = document.getElementById('btnSubmit');
+    const toggleBtn = document.getElementById('toggleAuth');
+    const groupName = document.getElementById('groupName');
+    const alertBox = document.getElementById('authAlert');
+
+    if (alertBox) alertBox.classList.add('d-none');
+
+    if (queremosLogin) {
+        authForm.action = '../../backend/auth/login.php';
         modalTitle.innerHTML = 'Bienvenido de <span>nuevo</span>';
-        modalSubtitle.innerText = 'Ingresa tus datos para continuar';
         btnSubmit.innerText = 'Entrar a Agendify';
-        footerQuestion.innerText = '¿No tienes cuenta?';
         toggleBtn.innerText = 'Regístrate';
-        groupName.classList.add('d-none');
+        if (groupName) groupName.classList.add('d-none');
     } else {
+        authForm.action = '../../backend/auth/registro.php';
         modalTitle.innerHTML = 'Crea tu <span>cuenta</span>';
-        modalSubtitle.innerText = 'Únete a la revolución de la productividad';
         btnSubmit.innerText = 'Crear cuenta gratis';
-        footerQuestion.innerText = '¿Ya tienes cuenta?';
         toggleBtn.innerText = 'Inicia sesión';
-        groupName.classList.remove('d-none');
+        if (groupName) groupName.classList.remove('d-none');
     }
 }
 
-// BOTÓN LOGIN (Navbar)
-document.querySelector('.link-login').addEventListener('click', (e) => {
-    e.preventDefault();
-    configurarModal(true); // Queremos modo login
-    modal.classList.add('active');
-});
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('authModal');
+    const alertBox = document.getElementById('authAlert');
+    const alertText = document.getElementById('alertText');
 
-// BOTONES REGISTRO (Navbar y Hero)
-// Seleccionamos ambos: el de la nav y el grande del centro
-document.querySelectorAll('.btn-nav, .btn-primary-pro').forEach(boton => {
-    boton.addEventListener('click', (e) => {
-        e.preventDefault();
-        configurarModal(false); // Queremos modo registro
+    document.getElementById('navLogin')?.addEventListener('click', () => {
+        configurarModal(true);
         modal.classList.add('active');
     });
-});
 
-// LINK DE CAMBIO (Dentro del modal)
-toggleBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    configurarModal(!isLogin); // Cambia al estado contrario
-});
+    document.querySelectorAll('.btn-nav, .btn-primary-pro').forEach(btn => {
+        btn.addEventListener('click', () => {
+            configurarModal(false);
+            modal.classList.add('active');
+        });
+    });
 
-// CERRAR MODAL
-btnClose.addEventListener('click', () => modal.classList.remove('active'));
-
-window.addEventListener('click', (e) => {
-    if (e.target === modal) {
+    document.getElementById('closeAuth')?.addEventListener('click', () => {
         modal.classList.remove('active');
+    });
+
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get('error');
+
+    if (error && modal && alertBox && alertText) {
+        setTimeout(() => {
+            modal.classList.add('active');
+            alertBox.classList.remove('d-none');
+
+            if (error === 'auth') {
+                configurarModal(true);
+                alertText.innerText = "Email o contraseña incorrectos.";
+            } else if (error === 'exists') {
+                configurarModal(false);
+                alertText.innerText = "Este correo ya está registrado.";
+            }
+        }, 100);
     }
 });

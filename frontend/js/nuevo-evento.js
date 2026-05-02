@@ -1,7 +1,6 @@
 // Esperar a que el DOM esté cargado para evitar errores
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('eventModal');
-    // Buscamos el botón en toda la página (normalmente está en el header del calendario)
     const openBtn = document.querySelector('.btn-add-event'); 
     const closeBtn = document.getElementById('closeEventModal');
     const cancelBtn = document.getElementById('btnCancelEvent');

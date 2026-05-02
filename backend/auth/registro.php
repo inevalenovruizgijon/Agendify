@@ -5,19 +5,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = mysqli_real_escape_string($conexion, $_POST['nombre']);
     $email = mysqli_real_escape_string($conexion, $_POST['email']);
     $password = $_POST['password'];
-
     $password_encriptada = password_hash($password, PASSWORD_BCRYPT);
 
-    $nombre_foto = "default-profile.png"; // Valor inicial
+    //VERIFICAR SI EL EMAIL YA EXISTE
+    $checkEmail = "SELECT email FROM usuarios WHERE email = '$email'";
+    $resCheck = mysqli_query($conexion, $checkEmail);
 
-    if (isset($_FILES['foto']) && $_FILES['foto']['error'] === 0) {
-        $ruta_destino = "../../uploads/";
-        $extension = pathinfo($_FILES['foto']['name'], PATHINFO_EXTENSION);
-        $nombre_foto = time() . "_" . bin2hex(random_bytes(4)) . "." . $extension;
-        
-        move_uploaded_file($_FILES['foto']['tmp_name'], $ruta_destino . $nombre_foto);
+    if (mysqli_num_rows($resCheck) > 0) {
+        header("Location: ../../frontend/html/index.php?error=exists");
+        exit();
     }
 
+    //PROCESAR REGISTRO
+    $nombre_foto = "default-profile.png"; 
     $sql = "INSERT INTO usuarios (nombre, email, password, foto_perfil) 
             VALUES ('$nombre', '$email', '$password_encriptada', '$nombre_foto')";
 
@@ -26,5 +26,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         header("Location: ../../frontend/html/index.php?error=db");
     }
+    exit();
 }
 ?>

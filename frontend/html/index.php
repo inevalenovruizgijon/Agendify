@@ -41,13 +41,13 @@
 
         <div class="image-grid">
             <div class="img-card card-1">
-                <img src="https://images.unsplash.com/photo-1506784919141-93b4827bb501?auto=format&fit=crop&w=600" alt="Work">
+                <img src="https://images.pexels.com/photos/5124870/pexels-photo-5124870.jpeg" alt="Work">
             </div>
             <div class="img-card card-2">
-                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=600" alt="Meeting">
+                <img src="https://images.pexels.com/photos/4050216/pexels-photo-4050216.jpeg" alt="Meeting">
             </div>
             <div class="img-card card-3">
-                <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=600" alt="Planning">
+                <img src="https://images.pexels.com/photos/11333728/pexels-photo-11333728.jpeg" alt="Planning">
             </div>
         </div>
 
@@ -74,7 +74,6 @@
         </div>
     </footer>
 
-    <!-- MODAL AJUSTADO PARA PHP -->
     <div class="modal-overlay" id="authModal">
         <div class="modal-card">
             <button class="close-modal" id="closeAuth"><i class="ri-close-line"></i></button>
@@ -86,9 +85,12 @@
                     <p id="modalSubtitle">Ingresa tus datos para continuar</p>
                 </div>
 
-                <!-- IMPORTANTE: El action se cambiará dinámicamente con JS -->
-                <!-- El enctype es para permitir subir la foto de perfil -->
-                <form class="modal-form" id="authForm" method="POST" action="../../backend/auth/login.php" enctype="multipart/form-data">
+                <div id="authAlert" class="alert-container d-none">
+                    <i class="ri-error-warning-line"></i>
+                    <span id="alertText"></span>
+                </div>
+
+                <form class="modal-form" id="authForm" method="POST" action="../../backend/auth/login.php">
                     
                     <div class="input-field d-none" id="groupName">
                         <label>Nombre Completo</label>
@@ -114,15 +116,6 @@
                         </div>
                     </div>
 
-                    <!-- Input de foto oculto por defecto (solo para registro) -->
-                    <div class="input-field d-none" id="groupFoto">
-                        <label>Foto de perfil (opcional)</label>
-                        <div class="input-inner">
-                            <i class="ri-image-add-line"></i>
-                            <input type="file" name="foto" accept="image/*">
-                        </div>
-                    </div>
-
                     <button type="submit" class="btn-submit-modal" id="btnSubmit">Entrar a Agendify</button>
                 </form>
                 
@@ -135,22 +128,6 @@
     </div>
 
     <script src="../js/script.js"></script>
-    <script>
-        // Lógica extra para cambiar el destino del formulario según el modo
-        const authForm = document.getElementById('authForm');
-        const toggleAuth = document.getElementById('toggleAuth');
-        const groupFoto = document.getElementById('groupFoto');
-
-        toggleAuth.addEventListener('click', () => {
-            const isLogin = authForm.action.includes('login.php');
-            if (isLogin) {
-                authForm.action = '../../backend/auth/registro.php';
-                groupFoto.classList.remove('d-none');
-            } else {
-                authForm.action = '../../backend/auth/login.php';
-                groupFoto.classList.add('d-none');
-            }
-        });
-    </script>
+    
 </body>
 </html>

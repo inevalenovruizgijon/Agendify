@@ -20,12 +20,12 @@
         </div>
 
         <nav class="sidebar-nav">
-    <a href="calendar.html" class="nav-item active">
+    <a href="calendar.php" class="nav-item active">
         <i class="ri-calendar-line"></i>
         <span>Calendario</span>
     </a>
     <!-- ENLACE A ACTIVIDADES -->
-    <a href="actividades.html" class="nav-item">
+    <a href="actividades.php" class="nav-item">
         <i class="ri-list-check"></i>
         <span>Actividades</span>
     </a>
@@ -34,7 +34,7 @@
         <span>Perfil</span>
     </a>
     <div class="nav-divider"></div>
-    <a href="index.html" class="nav-item logout">
+    <a href="index.php" class="nav-item logout">
         <i class="ri-logout-box-line"></i>
         <span>Cerrar sesión</span>
     </a>
@@ -73,7 +73,7 @@
         </section>
 
         <footer class="calendar-footer">
-            <a href="#" class="view-list">
+            <a href="actividades.php" class="view-list">
                 <i class="ri-list-check"></i> Ver lista completa de actividades
             </a>
         </footer>
@@ -100,11 +100,6 @@
                     <label>Hora *</label>
                     <input type="time" required>
                 </div>
-            </div>
-
-            <div class="input-group">
-                <label>Fecha límite *</label>
-                <input type="date" required>
             </div>
 
             <div class="input-group">

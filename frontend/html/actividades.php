@@ -4,15 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Actividades | Agendify</title>
-    <!-- Fuentes e Iconos -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/calendar.css"> <!-- Reutilizamos el CSS base -->
+    <link rel="stylesheet" href="../css/calendar.css"> 
     <link rel="stylesheet" href="../css/actividades.css">
 </head>
 <body class="calendar-page">
 
-    <!-- SIDEBAR -->
     <aside class="sidebar">
         <div class="sidebar-logo">
             <i class="ri-calendar-check-fill"></i>
@@ -22,17 +20,17 @@
             </div>
         </div>
         <nav class="sidebar-nav">
-            <a href="calendar.html" class="nav-item">
+            <a href="calendar.php" class="nav-item">
                 <i class="ri-calendar-line"></i> <span>Calendario</span>
             </a>
-            <a href="actividades.html" class="nav-item active">
+            <a href="actividades.php" class="nav-item active">
                 <i class="ri-list-check"></i> <span>Actividades</span>
             </a>
             <a href="#" class="nav-item">
                 <i class="ri-user-line"></i> <span>Perfil</span>
             </a>
             <div class="nav-divider"></div>
-            <a href="index.html" class="nav-item logout">
+            <a href="index.php" class="nav-item logout">
                 <i class="ri-logout-box-line"></i> <span>Cerrar sesión</span>
             </a>
         </nav>
@@ -41,7 +39,6 @@
         </div>
     </aside>
 
-    <!-- CONTENIDO PRINCIPAL -->
     <main class="calendar-main">
         <header class="calendar-header">
             <div class="header-info">
@@ -53,17 +50,14 @@
             </button>
         </header>
 
-        <!-- Layout de Columnas (Kanban Style) -->
         <section class="activities-layout">
             
-            <!-- Columna Pendientes -->
             <div class="activity-column">
                 <div class="column-header">
                     <h2 class="column-title">Pendientes</h2>
                     <span class="count-badge" id="count-pending">0</span>
                 </div>
                 <div class="column-content container-white" id="list-pending">
-                    <!-- JS inyectará las actividades aquí -->
                     <div class="empty-state">
                         <i class="ri-inbox-line"></i>
                         <p>No hay tareas pendientes</p>
@@ -71,7 +65,6 @@
                 </div>
             </div>
 
-            <!-- Columna Próximas -->
             <div class="activity-column">
                 <div class="column-header">
                     <h2 class="column-title">Próximas</h2>
@@ -85,7 +78,6 @@
                 </div>
             </div>
 
-            <!-- Columna Realizadas -->
             <div class="activity-column">
                 <div class="column-header">
                     <h2 class="column-title">Realizadas</h2>
@@ -100,14 +92,9 @@
             </div>
         </section>
 
-        <footer class="calendar-footer">
-            <a href="calendar.html" class="view-list">
-                <i class="ri-arrow-left-line"></i> Volver a la vista de calendario
-            </a>
-        </footer>
+        
     </main>
 
-    <!-- MODAL NUEVO EVENTO (Mismo que en calendario) -->
     <div class="modal-overlay" id="eventModal">
         <div class="modal-card event-card">
             <div class="event-modal-header">
@@ -141,6 +128,6 @@
         </div>
     </div>
 
-    <script src="../js/actividades.js"></script>
+    <script src="../js/nuevo-evento.js"></script>
 </body>
 </html>

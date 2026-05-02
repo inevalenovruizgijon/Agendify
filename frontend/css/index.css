@@ -332,3 +332,74 @@ body {
     margin-top: 15px;
     transition: 0.3s;
 }
+
+ .alert-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    line-height: 1.4;
+    border: 1px solid #fecaca;
+    background-color: #fee2e2; /* Rojo suave de fondo */
+    color: #dc2626;            /* Rojo fuerte para el texto */
+    transition: all 0.3s ease;
+}
+
+/* Icono dentro de la alerta */
+.alert-container i {
+    font-size: 1.25rem;
+    flex-shrink: 0;
+}
+
+/* Variante de éxito (Cuando el registro es OK) */
+.alert-success {
+    background-color: #dcfce7 !important;
+    color: #16a34a !important;
+    border-color: #bbf7d0 !important;
+}
+
+/* Utilidad para ocultar */
+.d-none {
+    display: none !important;
+}
+
+/* =========================================
+   AJUSTES EXTRA DE DISEÑO
+   ========================================= */
+
+/* Corrección para el footer (tenías una variable --border que no existía) */
+.footer-pro {
+    background: var(--white);
+    padding: 40px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+/* Espaciado del formulario dentro del modal */
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.input-field label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--dark);
+    opacity: 0.8;
+}
+
+/* Animación de entrada para el texto de error */
+#alertText {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateX(-5px); }
+    to { opacity: 1; transform: translateX(0); }
+}      
