@@ -78,14 +78,13 @@ body {
     font-size: 0.9rem;
 }
 
-/* --- SECCIÓN DEL ESLOGAN (EL CAMBIO PRO) --- */
 .hero-section {
     padding: 100px 20px;
     text-align: center;
 }
 
 .main-slogan {
-    font-size: 4.5rem; /* Tamaño masivo para impacto */
+    font-size: 4.5rem; 
     font-weight: 800;
     line-height: 1;
     letter-spacing: -3px;
@@ -99,7 +98,7 @@ body {
 
 .text-accent {
     color: var(--dark);
-    font-weight: 400; /* Contraste de grosor: una palabra gruesa, otra fina */
+    font-weight: 400; 
     font-style: italic;
 }
 
@@ -195,7 +194,7 @@ body {
 
 .social-pills a:hover { color: var(--blue); }
 
-.d-none { display: none; } /* Clase para ocultar campos */
+.d-none { display: none; }
 
 .input-inner {
     position: relative;
@@ -344,18 +343,16 @@ body {
     font-weight: 600;
     line-height: 1.4;
     border: 1px solid #fecaca;
-    background-color: #fee2e2; /* Rojo suave de fondo */
-    color: #dc2626;            /* Rojo fuerte para el texto */
+    background-color: #fee2e2;
+    color: #dc2626;            
     transition: all 0.3s ease;
 }
 
-/* Icono dentro de la alerta */
 .alert-container i {
     font-size: 1.25rem;
     flex-shrink: 0;
 }
 
-/* Variante de éxito (Cuando el registro es OK) */
 .alert-success {
     background-color: #dcfce7 !important;
     color: #16a34a !important;
@@ -367,18 +364,14 @@ body {
     display: none !important;
 }
 
-/* =========================================
-   AJUSTES EXTRA DE DISEÑO
-   ========================================= */
 
-/* Corrección para el footer (tenías una variable --border que no existía) */
+
 .footer-pro {
     background: var(--white);
     padding: 40px;
     border-top: 1px solid rgba(0,0,0,0.05);
 }
 
-/* Espaciado del formulario dentro del modal */
 .modal-form {
     display: flex;
     flex-direction: column;
@@ -394,7 +387,6 @@ body {
     opacity: 0.8;
 }
 
-/* Animación de entrada para el texto de error */
 #alertText {
     animation: fadeIn 0.3s ease;
 }

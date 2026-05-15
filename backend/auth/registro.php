@@ -22,9 +22,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             VALUES ('$nombre', '$email', '$password_encriptada', '$nombre_foto')";
 
     if (mysqli_query($conexion, $sql)) {
-        header("Location: ../../frontend/html/index.php?registro=ok");
+        header("Location: ../../public/views/index.php?registro=ok");
     } else {
-        header("Location: ../../frontend/html/index.php?error=db");
+        header("Location: ../../public/views/index.php?error=db");
     }
     exit();
 }
