@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         } else {
 
-            header("Location: ../../frontend/html/index.php?error=password"); 
+            header("Location: ../../public/views/index.php?error=password"); 
 
            
             exit();
