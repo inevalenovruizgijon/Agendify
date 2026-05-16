@@ -27,9 +27,64 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
         if (mysqli_num_rows($check) > 0) {
             $mensaje_error = 'Ese email ya está en uso por otra cuenta.';
         } else {
-            mysqli_query($conexion, "UPDATE usuarios SET nombre = '$nombre', email = '$email' WHERE id = $usuario_id");
-            $_SESSION['usuario_nombre'] = $nombre;
-            $mensaje_exito = 'Perfil actualizado correctamente.';
+
+            // Variable para guardar el fragmento SQL si se sube una foto nueva
+            $sql_foto_perfil = "";
+
+            // Verificar si se ha subido un archivo sin errores
+            if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === UPLOAD_ERR_OK) {
+                $file_tmp  = $_FILES['foto_perfil']['tmp_name'];
+                $file_name = $_FILES['foto_perfil']['name'];
+                $file_ext  = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+
+                // Extensiones permitidas
+                $extensiones_permitidas = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+
+                if (in_array($file_ext, $extensiones_permitidas)) {
+
+                    // CORRECCIÓN: Apuntamos correctamente dentro de 'public/assets/img/'
+                    $carpeta_assets = dirname(__DIR__, 1) . "/assets/img/";
+
+                    // Si por casualidad no la creaste antes, esto la creará en el sitio correcto
+                    if (!file_exists($carpeta_assets)) {
+                        mkdir($carpeta_assets, 0777, true);
+                    }
+
+                    // Nombre único para la imagen
+                    $nuevo_nombre_archivo = "user_" . $usuario_id . "_" . time() . "." . $file_ext;
+
+                    // Ruta de destino final absoluta
+                    $directorio_destino = $carpeta_assets . $nuevo_nombre_archivo;
+
+                    // Movemos el archivo temporal
+                    if (move_uploaded_file($file_tmp, $directorio_destino)) {
+                        // Preparamos el fragmento de consulta para añadirlo al UPDATE
+                        $sql_foto_perfil = ", foto_perfil = '$nuevo_nombre_archivo'";
+                    } else {
+                        $mensaje_error = 'Hubo un error al guardar la imagen en el servidor. Revisa los permisos de la carpeta public/assets/img/.';
+                    }
+                } else {
+                    $mensaje_error = 'Formato de imagen no válido. Usa JPG, PNG, GIF o WEBP.';
+                }
+            }
+
+            // Si no se han generado errores de archivo durante el proceso, actualizamos
+            if (empty($mensaje_error)) {
+                // CORRECCIÓN: Eliminamos ', bio = '$bio'' de la consulta para evitar el error de columna desconocida
+                $query_update = "UPDATE usuarios SET nombre = '$nombre', email = '$email' $sql_foto_perfil WHERE id = $usuario_id";
+
+                if (mysqli_query($conexion, $query_update)) {
+                    $_SESSION['usuario_nombre'] = $nombre;
+                    $mensaje_exito = 'Perfil actualizado correctamente.';
+
+                    // Si se subió una foto nueva, actualizamos también la variable de sesión
+                    if (!empty($sql_foto_perfil)) {
+                        $_SESSION['usuario_foto'] = $nuevo_nombre_archivo;
+                    }
+                } else {
+                    $mensaje_error = 'Error al actualizar los datos en la base de datos.';
+                }
+            }
         }
     }
 
@@ -66,6 +121,7 @@ mysqli_close($conexion);
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -74,167 +130,180 @@ mysqli_close($conexion);
     <link rel="stylesheet" href="../css/profile.css">
     <link rel="stylesheet" href="../css/sidebar.css">
 </head>
+
 <body>
-<div class="dashboard-container">
+    <div class="dashboard-container">
 
-   <aside class="sidebar">
-        <div class="sidebar-logo">
-            <i class="ri-calendar-check-fill"></i>
-            <div class="logo-text">
-                <span class="brand-name">Agendify</span>
-                <span class="brand-sub">Agencia Digital</span>
-            </div>
-        </div>
-        <nav class="sidebar-nav">
-            <a href="calendar.php" class="nav-item">
-                <i class="ri-calendar-line"></i> <span>Calendario</span>
-            </a>
-            <a href="actividades.php" class="nav-item ">
-                <i class="ri-list-check"></i> <span>Actividades</span>
-            </a>
-            <a href="profile.php" class="nav-item active">
-                <i class="ri-user-line"></i> <span>Perfil</span>
-            </a>
-            <div class="nav-divider"></div>
-            <a href="../../backend/auth/logout.php" class="nav-item logout">
-                <i class="ri-logout-box-line"></i> <span>Cerrar sesión</span>
-            </a>
-        </nav>
-        <div class="sidebar-footer">
-            <p>© 2026 Agendify Team</p>
-        </div>
-    </aside>
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="main-content">
-        <header class="content-header">
-            <h1>Mi perfil</h1>
-        </header>
-
-        <?php if ($mensaje_exito): ?>
-            <div class="alert alert-success"><i class="ri-checkbox-circle-line"></i> <?= htmlspecialchars($mensaje_exito) ?></div>
-        <?php endif; ?>
-        <?php if ($mensaje_error): ?>
-            <div class="alert alert-error"><i class="ri-error-warning-line"></i> <?= htmlspecialchars($mensaje_error) ?></div>
-        <?php endif; ?>
-
-        <section class="profile-card">
-
-            <!-- Cabecera -->
-            <div class="profile-header">
-                <div class="profile-avatar">
-                    <?php if ($usuario['foto_perfil'] && $usuario['foto_perfil'] !== 'default-profile.png'): ?>
-                        <img src="../assets/img/<?= htmlspecialchars($usuario['foto_perfil']) ?>" alt="Avatar">
-                    <?php else: ?>
-                        <div class="avatar-initials"><?= $iniciales ?></div>
-                    <?php endif; ?>
-                </div>
-                <div class="profile-info">
-                    <h2><?= htmlspecialchars($usuario['nombre']) ?></h2>
-                    <p class="profile-email"><i class="ri-mail-line"></i> <?= htmlspecialchars($usuario['email']) ?></p>
-                    <p class="profile-since"><i class="ri-calendar-line"></i> Usuario desde <?= $anio_registro ?></p>
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <i class="ri-calendar-check-fill"></i>
+                <div class="logo-text">
+                    <span class="brand-name">Agendify</span>
+                    <span class="brand-sub">Agencia Digital</span>
                 </div>
             </div>
-
-            <div class="profile-body" id="viewMode">
-                <div class="info-group">
-                    <label>Biografía</label>
-                    <div class="info-box">
-                        Usuario de Agendify desde <?= $anio_registro ?>
-                    </div>
-                </div>
-
-                <div class="stats-container">
-                    <label>Estadísticas</label>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <h3><?= $total ?></h3>
-                            <p>Eventos totales</p>
-                        </div>
-                        <div class="stat-card">
-                            <h3><?= $este_mes ?></h3>
-                            <p>Este mes</p>
-                        </div>
-                        <div class="stat-card">
-                            <h3><?= $hoy ?></h3>
-                            <p>Hoy</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="profile-actions">
-                    <button class="btn-edit" onclick="abrirEdicion()">Editar perfil</button>
-                    <button class="btn-delete" onclick="abrirModal()">Eliminar cuenta</button>
-                </div>
+            <nav class="sidebar-nav">
+                <a href="calendar.php" class="nav-item">
+                    <i class="ri-calendar-line"></i> <span>Calendario</span>
+                </a>
+                <a href="actividades.php" class="nav-item ">
+                    <i class="ri-list-check"></i> <span>Actividades</span>
+                </a>
+                <a href="profile.php" class="nav-item active">
+                    <i class="ri-user-line"></i> <span>Perfil</span>
+                </a>
+                <div class="nav-divider"></div>
+                <a href="../../backend/auth/logout.php" class="nav-item logout">
+                    <i class="ri-logout-box-line"></i> <span>Cerrar sesión</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>© 2026 Agendify Team</p>
             </div>
+        </aside>
 
-            <!-- Cuerpo: Formulario de edición -->
-            <div class="profile-body" id="editMode" style="display:none;">
-                <form method="POST" action="profile.php">
-                    <input type="hidden" name="accion" value="editar">
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1>Mi perfil</h1>
+                <a href="../../backend/auth/logout.php" class="mobile-logout-btn">
+                    <i class="ri-logout-box-line"></i>
+                </a>
+            </header>
 
-                    <div class="form-group">
-                        <label for="nombre">Nombre completo</label>
-                        <input type="text" id="nombre" name="nombre"
-                               value="<?= htmlspecialchars($usuario['nombre']) ?>" required>
+            <?php if ($mensaje_exito): ?>
+                <div class="alert alert-success"><i class="ri-checkbox-circle-line"></i> <?= htmlspecialchars($mensaje_exito) ?></div>
+            <?php endif; ?>
+            <?php if ($mensaje_error): ?>
+                <div class="alert alert-error"><i class="ri-error-warning-line"></i> <?= htmlspecialchars($mensaje_error) ?></div>
+            <?php endif; ?>
+
+            <section class="profile-card">
+
+                <!-- Cabecera -->
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <?php if ($usuario['foto_perfil'] && $usuario['foto_perfil'] !== 'default-profile.png'): ?>
+                            <img src="../assets/img/<?= htmlspecialchars($usuario['foto_perfil']) ?>" alt="Avatar">
+                        <?php else: ?>
+                            <div class="avatar-initials"><?= $iniciales ?></div>
+                        <?php endif; ?>
+                    </div>
+                    <div class="profile-info">
+                        <h2><?= htmlspecialchars($usuario['nombre']) ?></h2>
+                        <p class="profile-email"><i class="ri-mail-line"></i> <?= htmlspecialchars($usuario['email']) ?></p>
+                        <p class="profile-since"><i class="ri-calendar-line"></i> Usuario desde <?= $anio_registro ?></p>
+                    </div>
+                </div>
+
+                <div class="profile-body" id="viewMode">
+                    <div class="info-group">
+                        <label>Biografía</label>
+                        <div class="info-box">
+                            Usuario de Agendify desde <?= $anio_registro ?>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="email">Correo electrónico</label>
-                        <input type="email" id="email" name="email"
-                               value="<?= htmlspecialchars($usuario['email']) ?>" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="bio">Biografía</label>
-                        <textarea id="bio" name="bio" rows="3">Usuario de Agendify desde <?= $anio_registro ?></textarea>
+                    <div class="stats-container">
+                        <label>Estadísticas</label>
+                        <div class="stats-grid">
+                            <div class="stat-card">
+                                <h3><?= $total ?></h3>
+                                <p>Eventos totales</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3><?= $este_mes ?></h3>
+                                <p>Este mes</p>
+                            </div>
+                            <div class="stat-card">
+                                <h3><?= $hoy ?></h3>
+                                <p>Hoy</p>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="profile-actions">
-                        <button type="submit" class="btn-edit">Guardar cambios</button>
-                        <button type="button" class="btn-delete" onclick="cerrarEdicion()">Cancelar</button>
+                        <button class="btn-edit" onclick="abrirEdicion()">Editar perfil</button>
+                        <button class="btn-delete" onclick="abrirModal()">Eliminar cuenta</button>
                     </div>
-                </form>
-            </div>
+                </div>
 
-        </section>
-    </main>
-</div>
+                <!-- Cuerpo: Formulario de edición -->
+                <div class="profile-body" id="editMode" style="display:none;">
+                    <form method="POST" action="profile.php" enctype="multipart/form-data">
+                        <input type="hidden" name="accion" value="editar">
 
-<!--eliminar cuenta -->
-<div class="modal-overlay" id="modalEliminar">
-    <div class="modal-box">
-        <h3><i class="ri-error-warning-line"></i> ¿Eliminar cuenta?</h3>
-        <p>Esta acción es <strong>irreversible</strong>. Se eliminarán todos tus datos y eventos de Agendify.</p>
-        <form method="POST" action="profile.php">
-            <input type="hidden" name="accion" value="eliminar">
-            <div class="modal-actions">
-                <button type="button" class="btn-edit" onclick="cerrarModal()">Cancelar</button>
-                <button type="submit" class="btn-confirm-delete">Sí, eliminar mi cuenta</button>
-            </div>
-        </form>
+                        <div class="form-group">
+                            <label for="foto_perfil">Foto de perfil</label>
+                            <input type="file" id="foto_perfil" name="foto_perfil" accept="image/*">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nombre">Nombre completo</label>
+                            <input type="text" id="nombre" name="nombre"
+                                value="<?= htmlspecialchars($usuario['nombre']) ?>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Correo electrónico</label>
+                            <input type="email" id="email" name="email"
+                                value="<?= htmlspecialchars($usuario['email']) ?>" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="bio">Biografía</label>
+                            <textarea id="bio" name="bio" rows="3">Usuario de Agendify desde <?= $anio_registro ?></textarea>
+                        </div>
+
+                        <div class="profile-actions">
+                            <button type="submit" class="btn-edit">Guardar cambios</button>
+                            <button type="button" class="btn-delete" onclick="cerrarEdicion()">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+
+            </section>
+        </main>
     </div>
-</div>
 
-<script>
-    function abrirEdicion() {
-        document.getElementById('viewMode').style.display = 'none';
-        document.getElementById('editMode').style.display = 'block';
-    }
-    function cerrarEdicion() {
-        document.getElementById('editMode').style.display = 'none';
-        document.getElementById('viewMode').style.display = 'block';
-    }
-    function abrirModal() {
-        document.getElementById('modalEliminar').style.display = 'flex';
-    }
-    function cerrarModal() {
-        document.getElementById('modalEliminar').style.display = 'none';
-    }
-    document.getElementById('modalEliminar').addEventListener('click', function(e) {
-        if (e.target === this) cerrarModal();
-    });
-</script>
+    <!--eliminar cuenta -->
+    <div class="modal-overlay" id="modalEliminar">
+        <div class="modal-box">
+            <h3><i class="ri-error-warning-line"></i> ¿Eliminar cuenta?</h3>
+            <p>Esta acción es <strong>irreversible</strong>. Se eliminarán todos tus datos y eventos de Agendify.</p>
+            <form method="POST" action="profile.php">
+                <input type="hidden" name="accion" value="eliminar">
+                <div class="modal-actions">
+                    <button type="button" class="btn-edit" onclick="cerrarModal()">Cancelar</button>
+                    <button type="submit" class="btn-confirm-delete">Sí, eliminar mi cuenta</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function abrirEdicion() {
+            document.getElementById('viewMode').style.display = 'none';
+            document.getElementById('editMode').style.display = 'block';
+        }
+
+        function cerrarEdicion() {
+            document.getElementById('editMode').style.display = 'none';
+            document.getElementById('viewMode').style.display = 'block';
+        }
+
+        function abrirModal() {
+            document.getElementById('modalEliminar').style.display = 'flex';
+        }
+
+        function cerrarModal() {
+            document.getElementById('modalEliminar').style.display = 'none';
+        }
+        document.getElementById('modalEliminar').addEventListener('click', function(e) {
+            if (e.target === this) cerrarModal();
+        });
+    </script>
 
 </body>
+
 </html>

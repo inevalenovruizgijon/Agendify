@@ -37,9 +37,21 @@
     border-radius: 20px;
     letter-spacing: 0.02em;
 }
-.count-pendiente { background: #fef3c7; color: #b45309; }
-.count-proxima   { background: #ede9fe; color: #6d28d9; }
-.count-realizada { background: #d1fae5; color: #065f46; }
+
+.count-pendiente {
+    background: #fef3c7;
+    color: #b45309;
+}
+
+.count-proxima {
+    background: #ede9fe;
+    color: #6d28d9;
+}
+
+.count-realizada {
+    background: #d1fae5;
+    color: #065f46;
+}
 
 .column-content {
     flex: 1;
@@ -54,9 +66,18 @@
     gap: 10px;
 }
 
-.column-content::-webkit-scrollbar { width: 3px; }
-.column-content::-webkit-scrollbar-track { background: transparent; }
-.column-content::-webkit-scrollbar-thumb { background: #dde3ea; border-radius: 4px; }
+.column-content::-webkit-scrollbar {
+    width: 3px;
+}
+
+.column-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.column-content::-webkit-scrollbar-thumb {
+    background: #dde3ea;
+    border-radius: 4px;
+}
 
 .empty-state {
     display: flex;
@@ -69,39 +90,68 @@
     text-align: center;
     gap: 10px;
 }
-.empty-state i  { font-size: 2rem; }
-.empty-state p  { font-size: 0.8rem; font-weight: 600; margin: 0; }
+
+.empty-state i {
+    font-size: 2rem;
+}
+
+.empty-state p {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 0;
+}
 
 
 
 .activity-card {
     display: flex;
-    flex-shrink: 0; /* Para que no se aplasten */
+    flex-shrink: 0;
+    /* Para que no se aplasten */
     border-radius: 14px;
     overflow: hidden;
     background: #ffffff;
     border: 1.5px solid #edf0f5;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05), 0 4px 12px rgba(0,0,0,0.04);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.04);
     transition: transform 0.18s ease, box-shadow 0.18s ease;
     position: relative;
 }
 
 .activity-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 6px 24px rgba(0,0,0,0.09), 0 2px 6px rgba(0,0,0,0.05);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.09), 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
-.card-alta  { background: linear-gradient(135deg, #fff8f8 0%, #ffffff 60%); border-color: #fbd5d5; }
-.card-media { background: linear-gradient(135deg, #fffdf5 0%, #ffffff 60%); border-color: #fde9a2; }
-.card-baja  { background: linear-gradient(135deg, #f5fff8 0%, #ffffff 60%); border-color: #bbf7d0; }
+.card-alta {
+    background: linear-gradient(135deg, #fff8f8 0%, #ffffff 60%);
+    border-color: #fbd5d5;
+}
+
+.card-media {
+    background: linear-gradient(135deg, #fffdf5 0%, #ffffff 60%);
+    border-color: #fde9a2;
+}
+
+.card-baja {
+    background: linear-gradient(135deg, #f5fff8 0%, #ffffff 60%);
+    border-color: #bbf7d0;
+}
 
 .ac-priority-bar {
     width: 4px;
     flex-shrink: 0;
 }
-.card-alta  .ac-priority-bar { background: linear-gradient(180deg, #f87171, #ef4444); }
-.card-media .ac-priority-bar { background: linear-gradient(180deg, #fbbf24, #f59e0b); }
-.card-baja  .ac-priority-bar { background: linear-gradient(180deg, #4ade80, #22c55e); }
+
+.card-alta .ac-priority-bar {
+    background: linear-gradient(180deg, #f87171, #ef4444);
+}
+
+.card-media .ac-priority-bar {
+    background: linear-gradient(180deg, #fbbf24, #f59e0b);
+}
+
+.card-baja .ac-priority-bar {
+    background: linear-gradient(180deg, #4ade80, #22c55e);
+}
 
 .ac-body {
     flex: 1;
@@ -144,9 +194,21 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
 }
-.ac-pill.card-alta  { background: #fee2e2; color: #b91c1c; }
-.ac-pill.card-media { background: #fef3c7; color: #92400e; }
-.ac-pill.card-baja  { background: #dcfce7; color: #166534; }
+
+.ac-pill.card-alta {
+    background: #fee2e2;
+    color: #b91c1c;
+}
+
+.ac-pill.card-media {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.ac-pill.card-baja {
+    background: #dcfce7;
+    color: #166534;
+}
 
 .ac-desc {
     font-size: 0.775rem;
@@ -158,11 +220,15 @@
     overflow: hidden;
     margin: 0;
 }
+
 .nav-item.active {
-    background: rgba(91, 164, 207, 0.12); /* Fondo mucho más suave y transparente */
-    color: var(--accent);                /* Texto en azul claro */
+    background: rgba(91, 164, 207, 0.12);
+    /* Fondo mucho más suave y transparente */
+    color: var(--accent);
+    /* Texto en azul claro */
     opacity: 1;
-    position: relative;                  /* Necesario para posicionar la barrita */
+    position: relative;
+    /* Necesario para posicionar la barrita */
     font-weight: 700;
 }
 
@@ -170,13 +236,19 @@
 .nav-item.active::after {
     content: "";
     position: absolute;
-    right: 0;           /* Pegada al borde derecho */
-    top: 20%;           /* No ocupa todo el alto, se ve más moderno */
-    height: 60%;        /* Centrada verticalmente */
-    width: 3px;         /* Más fina */
+    right: 0;
+    /* Pegada al borde derecho */
+    top: 20%;
+    /* No ocupa todo el alto, se ve más moderno */
+    height: 60%;
+    /* Centrada verticalmente */
+    width: 3px;
+    /* Más fina */
     background-color: var(--accent);
-    border-radius: 4px 0 0 4px; /* Bordes redondeados solo hacia adentro */
-    box-shadow: -2px 0 8px rgba(91, 164, 207, 0.5); /* Un pequeño brillo */
+    border-radius: 4px 0 0 4px;
+    /* Bordes redondeados solo hacia adentro */
+    box-shadow: -2px 0 8px rgba(91, 164, 207, 0.5);
+    /* Un pequeño brillo */
 }
 
 /* Aseguramos que el icono también brille un poco */
@@ -184,12 +256,14 @@
     color: var(--accent);
     filter: drop-shadow(0 0 2px rgba(91, 164, 207, 0.3));
 }
+
 .ac-meta {
     display: flex;
     align-items: center;
     gap: 10px;
     flex-wrap: wrap;
 }
+
 .ac-meta-item {
     font-size: 0.7rem;
     color: #94a3b8;
@@ -198,7 +272,10 @@
     gap: 3px;
     font-weight: 500;
 }
-.ac-meta-item i { font-size: 0.75rem; }
+
+.ac-meta-item i {
+    font-size: 0.75rem;
+}
 
 .ac-dias {
     margin-left: auto;
@@ -216,7 +293,7 @@
     gap: 6px;
     margin-top: 2px;
     padding-top: 8px;
-    border-top: 1px solid rgba(0,0,0,0.05);
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .ac-btn-edit,
@@ -236,10 +313,27 @@
     font-family: inherit;
     letter-spacing: 0.02em;
 }
-.ac-btn-edit          { background: #f1f5f9; color: #475569; }
-.ac-btn-edit:hover    { background: #e2e8f0; color: #1e293b; transform: scale(1.02); }
-.ac-btn-delete        { background: #fff1f2; color: #e11d48; }
-.ac-btn-delete:hover  { background: #ffe4e6; transform: scale(1.02); }
+
+.ac-btn-edit {
+    background: #f1f5f9;
+    color: #475569;
+}
+
+.ac-btn-edit:hover {
+    background: #e2e8f0;
+    color: #1e293b;
+    transform: scale(1.02);
+}
+
+.ac-btn-delete {
+    background: #fff1f2;
+    color: #e11d48;
+}
+
+.ac-btn-delete:hover {
+    background: #ffe4e6;
+    transform: scale(1.02);
+}
 
 
 .input-group label i {
@@ -278,31 +372,71 @@
     letter-spacing: 0.02em;
 }
 
-.prio-baja  span { border-color: #bbf7d0; }
-.prio-media span { border-color: #fde68a; }
-.prio-alta  span { border-color: #fecaca; }
+.prio-baja span {
+    border-color: #bbf7d0;
+}
 
-.prio-opt.selected.prio-baja  span { background: #dcfce7; color: #166534; border-color: #22c55e; }
-.prio-opt.selected.prio-media span { background: #fef3c7; color: #92400e; border-color: #f59e0b; }
-.prio-opt.selected.prio-alta  span { background: #fee2e2; color: #b91c1c; border-color: #ef4444; }
+.prio-media span {
+    border-color: #fde68a;
+}
 
-.prio-baja:hover  span { background: #f0fdf4; color: #166534; }
-.prio-media:hover span { background: #fffbeb; color: #92400e; }
-.prio-alta:hover  span { background: #fff5f5; color: #b91c1c; }
+.prio-alta span {
+    border-color: #fecaca;
+}
+
+.prio-opt.selected.prio-baja span {
+    background: #dcfce7;
+    color: #166534;
+    border-color: #22c55e;
+}
+
+.prio-opt.selected.prio-media span {
+    background: #fef3c7;
+    color: #92400e;
+    border-color: #f59e0b;
+}
+
+.prio-opt.selected.prio-alta span {
+    background: #fee2e2;
+    color: #b91c1c;
+    border-color: #ef4444;
+}
+
+.prio-baja:hover span {
+    background: #f0fdf4;
+    color: #166534;
+}
+
+.prio-media:hover span {
+    background: #fffbeb;
+    color: #92400e;
+}
+
+.prio-alta:hover span {
+    background: #fff5f5;
+    color: #b91c1c;
+}
 
 
 .nav-divider {
     height: 1px;
-    background: rgba(255,255,255,0.08);
+    background: rgba(255, 255, 255, 0.08);
     margin: 10px 0;
 }
 
-.nav-item.logout { color: rgba(255,100,100,0.7); margin-top: auto; }
-.nav-item.logout:hover { background: rgba(255,80,80,0.1); color: #ff7070; }
+.nav-item.logout {
+    color: rgba(255, 100, 100, 0.7);
+    margin-top: auto;
+}
+
+.nav-item.logout:hover {
+    background: rgba(255, 80, 80, 0.1);
+    color: #ff7070;
+}
 
 .sidebar-footer {
     font-size: 0.72rem;
-    color: rgba(255,255,255,0.25);
+    color: rgba(255, 255, 255, 0.25);
     text-align: center;
     padding-top: 20px;
 }
@@ -325,9 +459,10 @@
     background: #f0fdf4;
     color: #166534;
 }
-.ac-btn-done:hover { 
-    background: #dcfce7; 
-    transform: scale(1.02); 
+
+.ac-btn-done:hover {
+    background: #dcfce7;
+    transform: scale(1.02);
 }
 
 
@@ -336,14 +471,14 @@ body.calendar-page {
 }
 
 .calendar-main {
-    height: 100vh; 
+    height: 100vh;
     display: flex;
     flex-direction: column;
     padding-bottom: 20px;
 }
 
 .column-content {
-    overflow-y: auto; 
+    overflow-y: auto;
 }
 
 
@@ -352,10 +487,11 @@ body.calendar-page {
    ADAPTACIÓN PARA MODO MÓVIL (PANTALLAS MENORES A 768px)
    ========================================================================== */
 @media (max-width: 768px) {
-    
+
     /* 1. Reajuste del Body y Contenedor Principal */
     body.calendar-page {
-        overflow: auto; /* Permitir scroll general en el móvil si es necesario */
+        overflow: auto;
+        /* Permitir scroll general en el móvil si es necesario */
         display: flex;
         flex-direction: column;
     }
@@ -364,7 +500,8 @@ body.calendar-page {
         height: auto;
         min-height: 100vh;
         padding: 16px;
-        padding-bottom: 90px; /* Espacio extra abajo para que la barra inferior no tape el contenido */
+        padding-bottom: 90px;
+        /* Espacio extra abajo para que la barra inferior no tape el contenido */
     }
 
     /* 2. Cabecera Adaptable */
@@ -376,16 +513,19 @@ body.calendar-page {
     }
 
     .calendar-header h1 {
-        font-size: 1.4rem; /* Texto un poco más pequeño para pantallas móviles */
+        font-size: 1.4rem;
+        /* Texto un poco más pequeño para pantallas móviles */
     }
 
     .btn-add-event span {
-        display: none; /* Escondemos el texto "Nuevo evento" para ahorrar espacio */
+        display: none;
+        /* Escondemos el texto "Nuevo evento" para ahorrar espacio */
     }
-    
+
     .btn-add-event {
         padding: 10px 12px;
-        border-radius: 50%; /* Lo convertimos en un botón flotante/circular de "+" */
+        border-radius: 50%;
+        /* Lo convertimos en un botón flotante/circular de "+" */
     }
 
     /* 3. Transformación del Layout de Columnas (De 3 columnas a 1 columna vertical) */
@@ -400,26 +540,29 @@ body.calendar-page {
     }
 
     .column-content {
-        max-height: 400px; /* Limitamos la altura de cada bloque con su propio scroll interno */
+        max-height: 400px;
+        /* Limitamos la altura de cada bloque con su propio scroll interno */
         overflow-y: auto;
         padding: 12px;
     }
 
-    @media (max-width: 768px) {
-    
+
     /* ... (mantén tus estilos previos de body, calendar-main y columns igual) ... */
 
     /* 4. RECORRECCIÓN DE LA SIDEBAR (Asegurar que vaya abajo) */
     .sidebar {
         position: fixed !important;
         bottom: 0 !important;
-        top: auto !important; /* Forzamos a que anule el posicionamiento superior de escritorio */
+        top: auto !important;
+        /* Forzamos a que anule el posicionamiento superior de escritorio */
         left: 0;
         right: 0;
         width: 100% !important;
-        height: 70px !important; /* Un poquito más de aire para los pulgares */
-        background: #0f172a; 
-        z-index: 9999; /* Asegura que se superponga a las tarjetas al hacer scroll */
+        height: 70px !important;
+        /* Un poquito más de aire para los pulgares */
+        background: #0f172a;
+        z-index: 9999;
+        /* Asegura que se superponga a las tarjetas al hacer scroll */
         display: flex !important;
         flex-direction: row !important;
         justify-content: space-between;
@@ -432,15 +575,16 @@ body.calendar-page {
     /* Forzar que el contenedor principal respire por arriba al no tener la barra estorbando */
     .calendar-main {
         padding-top: 20px !important;
-        padding-bottom: 90px !important; /* Espacio para que las tarjetas no se escondan detrás de la barra */
+        padding-bottom: 90px !important;
+        /* Espacio para que las tarjetas no se escondan detrás de la barra */
     }
 
     /* Ocultar elementos sobrantes */
-    .sidebar-logo, 
-    .nav-divider, 
+    .sidebar-logo,
+    .nav-divider,
     .sidebar-footer,
     .nav-item.logout {
-        display: none !important; 
+        display: none !important;
     }
 
     .sidebar-nav {
@@ -475,22 +619,24 @@ body.calendar-page {
 
     /* 5. CORRECCIÓN DEL INDICADOR ACTIVO (El recuadro desalineado con la 'T') */
     .nav-item.active {
-        background: transparent !important; /* Quitamos fondos raros en móvil */
-        color: #5ba4cf !important; 
+        background: transparent !important;
+        /* Quitamos fondos raros en móvil */
+        color: #5ba4cf !important;
     }
 
     /* Reubicamos la barrita indicadora de pestaña activa en la parte superior del botón */
     .nav-item.active::after {
         content: "" !important;
         position: absolute !important;
-        top: -6px !important; /* Se sitúa justo en el borde superior interno de la barra */
+        top: -6px !important;
+        /* Se sitúa justo en el borde superior interno de la barra */
         left: 50% !important;
         transform: translateX(-50%) !important;
         width: 30px !important;
         height: 4px !important;
-        background-color: #5ba4cf !important; /* Color de tu diseño original */
+        background-color: #5ba4cf !important;
+        /* Color de tu diseño original */
         border-radius: 0 0 4px 4px !important;
         box-shadow: 0 2px 8px rgba(91, 164, 207, 0.6) !important;
     }
-}
 }
