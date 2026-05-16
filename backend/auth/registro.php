@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $resCheck = mysqli_query($conexion, $checkEmail);
 
     if (mysqli_num_rows($resCheck) > 0) {
-        header("Location: ../../frontend/html/index.php?error=exists");
+        header("Location: ../../public/views/index.php?error=exists");
         exit();
     }
 
