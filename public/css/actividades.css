@@ -77,6 +77,7 @@
 
 .activity-card {
     display: flex;
+    flex-shrink: 0; /* Para que no se aplasten */
     border-radius: 14px;
     overflow: hidden;
     background: #ffffff;
@@ -301,17 +302,22 @@
     color: #166534;
 }
 .ac-btn-done:hover { background: #dcfce7; transform: scale(1.02); }
+
+
+/* NUEVO CÓDIGO PARA EL FINAL DEL CSS */
 body.calendar-page {
-    overflow: auto; 
+    overflow: hidden; /* Oculta el scroll general de la pantalla completa */
 }
 
 .calendar-main {
-    height: auto; 
-    min-height: 100vh;
-    padding-bottom: 40px;
+    height: 100vh; /* Fija la altura al 100% de la ventana */
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 20px;
 }
 
 .column-content {
-    overflow-y: visible; 
-    max-height: none;
+    /* El overflow-y: auto ya lo tienes arriba en tu CSS, 
+       pero nos aseguramos de que no se sobreescriba */
+    overflow-y: auto; 
 }
