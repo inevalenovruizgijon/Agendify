@@ -1,26 +1,28 @@
-/* ═══════════════════════════════════════════════════════
-   profile.css  –  Agendify Profile  (rediseño premium)
-═══════════════════════════════════════════════════════ */
-
 @import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap');
 
 :root {
-    --navy:      #0a1931;
-    --navy-mid:  #112244;
-    --accent:    #5ba4cf;
-    --accent-2:  #38bdf8;
-    --soft-bg:   #f0f5fb;
-    --card-bg:   #ffffff;
-    --text:      #0f1e35;
-    --muted:     #6b7a99;
-    --border:    #e2eaf5;
-    --danger:    #e03b3b;
-    --success:   #16a34a;
-    --radius:    18px;
-    --shadow:    0 8px 40px rgba(10,25,49,.10);
+    --navy: #0a1931;
+    --navy-mid: #112244;
+    --accent: #5ba4cf;
+    --accent-2: #38bdf8;
+    --soft-bg: #f0f5fb;
+    --card-bg: #ffffff;
+    --text: #0f1e35;
+    --muted: #6b7a99;
+    --border: #e2eaf5;
+    --danger: #e03b3b;
+    --success: #16a34a;
+    --radius: 18px;
+    --shadow: 0 8px 40px rgba(10, 25, 49, .10);
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
 body {
     font-family: 'DM Sans', sans-serif;
@@ -62,8 +64,18 @@ body {
     font-size: 13.5px;
     font-weight: 500;
 }
-.alert-success { background: #d1fae5; color: #065f46; border: 1px solid #a7f3d0; }
-.alert-error   { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; }
+
+.alert-success {
+    background: #d1fae5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.alert-error {
+    background: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fca5a5;
+}
 
 /* ══════════════════════════════════════
    TARJETA PRINCIPAL
@@ -91,19 +103,24 @@ body {
 .profile-header::before {
     content: '';
     position: absolute;
-    top: -60px; right: -60px;
-    width: 240px; height: 240px;
+    top: -60px;
+    right: -60px;
+    width: 240px;
+    height: 240px;
     border-radius: 50%;
-    background: rgba(91,164,207,.12);
+    background: rgba(91, 164, 207, .12);
     pointer-events: none;
 }
+
 .profile-header::after {
     content: '';
     position: absolute;
-    bottom: -40px; left: 30%;
-    width: 160px; height: 160px;
+    bottom: -40px;
+    left: 30%;
+    width: 160px;
+    height: 160px;
     border-radius: 50%;
-    background: rgba(56,189,248,.07);
+    background: rgba(56, 189, 248, .07);
     pointer-events: none;
 }
 
@@ -113,7 +130,7 @@ body {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    border: 3px solid rgba(255,255,255,.35);
+    border: 3px solid rgba(255, 255, 255, .35);
     flex-shrink: 0;
     position: relative;
     z-index: 1;
@@ -129,7 +146,7 @@ body {
     font-weight: 800;
     color: white;
     letter-spacing: -1px;
-    box-shadow: 0 4px 24px rgba(91,164,207,.4);
+    box-shadow: 0 4px 24px rgba(91, 164, 207, .4);
 }
 
 /* Info de texto en la cabecera */
@@ -151,15 +168,19 @@ body {
 .profile-email,
 .profile-since {
     font-size: 13px;
-    color: rgba(255,255,255,.65);
+    color: rgba(255, 255, 255, .65);
     margin-top: 5px;
     display: flex;
     align-items: center;
     gap: 6px;
     font-weight: 400;
 }
+
 .profile-email i,
-.profile-since i { font-size: 14px; opacity: 0.8; }
+.profile-since i {
+    font-size: 14px;
+    opacity: 0.8;
+}
 
 /* ── Cuerpo ── */
 .profile-body {
@@ -215,19 +236,31 @@ body {
     overflow: hidden;
     transition: transform .2s, box-shadow .2s;
 }
+
 .stat-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 28px rgba(10,25,49,.08);
+    box-shadow: 0 10px 28px rgba(10, 25, 49, .08);
 }
 
 /* Acento de color en cada stat */
-.stat-card:nth-child(1)::before { background: linear-gradient(135deg, #5ba4cf, #38bdf8); }
-.stat-card:nth-child(2)::before { background: linear-gradient(135deg, #818cf8, #6366f1); }
-.stat-card:nth-child(3)::before { background: linear-gradient(135deg, #34d399, #10b981); }
+.stat-card:nth-child(1)::before {
+    background: linear-gradient(135deg, #5ba4cf, #38bdf8);
+}
+
+.stat-card:nth-child(2)::before {
+    background: linear-gradient(135deg, #818cf8, #6366f1);
+}
+
+.stat-card:nth-child(3)::before {
+    background: linear-gradient(135deg, #34d399, #10b981);
+}
+
 .stat-card::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; right: 0;
+    top: 0;
+    left: 0;
+    right: 0;
     height: 4px;
     border-radius: 14px 14px 0 0;
 }
@@ -240,6 +273,7 @@ body {
     letter-spacing: -1px;
     line-height: 1;
 }
+
 .stat-card p {
     font-size: 12px;
     color: var(--muted);
@@ -269,7 +303,11 @@ body {
     transition: background .2s, transform .15s;
     letter-spacing: .2px;
 }
-.btn-edit:hover { background: var(--navy-mid); transform: translateY(-1px); }
+
+.btn-edit:hover {
+    background: var(--navy-mid);
+    transform: translateY(-1px);
+}
 
 .btn-delete {
     font-family: 'Sora', sans-serif;
@@ -283,6 +321,7 @@ body {
     border-radius: 10px;
     transition: background .2s, color .2s, border-color .2s;
 }
+
 .btn-delete:hover {
     background: #fff1f1;
     color: var(--danger);
@@ -290,7 +329,9 @@ body {
 }
 
 /* ── Formulario edición ── */
-.form-group { margin-bottom: 20px; }
+.form-group {
+    margin-bottom: 20px;
+}
 
 .form-group input,
 .form-group textarea {
@@ -305,12 +346,13 @@ body {
     resize: vertical;
     transition: border-color .2s, box-shadow .2s, background .2s;
 }
+
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
     border-color: var(--accent);
     background: white;
-    box-shadow: 0 0 0 4px rgba(91,164,207,.12);
+    box-shadow: 0 0 0 4px rgba(91, 164, 207, .12);
 }
 
 /* ══════════════════════════════════════
@@ -320,7 +362,7 @@ body {
     display: none;
     position: fixed;
     inset: 0;
-    background: rgba(10,25,49,.6);
+    background: rgba(10, 25, 49, .6);
     backdrop-filter: blur(5px);
     z-index: 1000;
     align-items: center;
@@ -333,12 +375,20 @@ body {
     padding: 36px;
     max-width: 420px;
     width: 90%;
-    box-shadow: 0 32px 80px rgba(10,25,49,.25);
+    box-shadow: 0 32px 80px rgba(10, 25, 49, .25);
     animation: modalIn .25s ease;
 }
+
 @keyframes modalIn {
-    from { opacity: 0; transform: scale(.95) translateY(10px); }
-    to   { opacity: 1; transform: scale(1)  translateY(0); }
+    from {
+        opacity: 0;
+        transform: scale(.95) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
 }
 
 .modal-box h3 {
@@ -351,7 +401,10 @@ body {
     align-items: center;
     gap: 8px;
 }
-.modal-box h3 i { font-size: 1.3rem; }
+
+.modal-box h3 i {
+    font-size: 1.3rem;
+}
 
 .modal-box p {
     font-size: 14px;
@@ -378,24 +431,220 @@ body {
     border-radius: 10px;
     transition: background .2s;
 }
-.btn-confirm-delete:hover { background: #c0392b; }
+
+.btn-confirm-delete:hover {
+    background: #c0392b;
+}
 
 /* ══════════════════════════════════════
    SIDEBAR (heredado de sidebar.css pero
    declarado aquí como fallback)
 ══════════════════════════════════════ */
 .nav-item.active {
-    background: rgba(91,164,207,.12);
+    background: rgba(91, 164, 207, .12);
     color: var(--accent, #5ba4cf);
     font-weight: 700;
     position: relative;
 }
+
 .nav-item.active::after {
     content: '';
     position: absolute;
-    right: 0; top: 20%; height: 60%;
+    right: 0;
+    top: 20%;
+    height: 60%;
     width: 3px;
     background: var(--accent, #5ba4cf);
     border-radius: 4px 0 0 4px;
 }
-.nav-item.active i { color: var(--accent, #5ba4cf); }
+
+.nav-item.active i {
+    color: var(--accent, #5ba4cf);
+}
+
+
+/* Ocultar el botón de cerrar sesión móvil en pantallas grandes */
+.mobile-logout-btn {
+    display: none;
+}
+
+/* Estilo específico para el input de tipo archivo */
+.form-group input[type="file"] {
+    background: #ffffff;
+    cursor: pointer;
+    padding: 10px 14px;
+}
+
+/* ==========================================================================
+   ADAPTACIÓN PARA MÓVIL (Mismo sistema de navegación inferior que Actividades)
+   ========================================================================== */
+@media (max-width: 768px) {
+
+    /* 1. Reajuste del Contenedor Principal */
+    .dashboard-container {
+        flex-direction: column;
+    }
+
+    .main-content {
+        padding: 24px 16px 100px !important; /* Espacio extra abajo para la barra inferior */
+        max-width: 100%;
+    }
+
+    .content-header h1 {
+        font-size: 1.6rem;
+        text-align: center;
+    }
+
+    /* 2. RECORRECCIÓN DE LA SIDEBAR (Igual a tu barra inferior de Actividades) */
+    .sidebar {
+        position: fixed !important;
+        bottom: 0 !important;
+        top: auto !important; /* Anula la posición superior de escritorio */
+        left: 0;
+        right: 0;
+        width: 100% !important;
+        height: 70px !important; /* Mismo grosor cómodo */
+        background: #0f172a; /* Fondo idéntico al de Actividades */
+        z-index: 9999;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 16px !important;
+        box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.3);
+        border-radius: 16px 16px 0 0;
+    }
+
+    /* Ocultar elementos que no van en la barra inferior móvil */
+    .sidebar-logo,
+    .nav-divider,
+    .sidebar-footer,
+    .nav-item.logout {
+        display: none !important;
+    }
+
+    .sidebar-nav {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .nav-item {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 4px !important;
+        font-size: 0.7rem !important;
+        color: #94a3b8;
+        padding: 8px 12px !important;
+        width: auto !important;
+        background: transparent !important;
+        position: relative;
+    }
+
+    .nav-item i {
+        font-size: 1.3rem !important;
+        line-height: 1 !important;
+    }
+
+    /* 3. CORRECCIÓN DEL INDICADOR ACTIVO (Barrita arriba del botón) */
+    .nav-item.active {
+        background: transparent !important;
+        color: #5ba4cf !important;
+    }
+
+    .nav-item.active::after {
+        content: "" !important;
+        position: absolute !important;
+        top: -6px !important; /* Se pega al borde superior de la barra */
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 30px !important;
+        height: 4px !important;
+        background-color: #5ba4cf !important;
+        border-radius: 0 0 4px 4px !important;
+        box-shadow: 0 2px 8px rgba(91, 164, 207, 0.6) !important;
+    }
+
+    /* 4. ADAPTACIÓN EXCLUSIVA DE LA TARJETA DE PERFIL (Para evitar roturas) */
+    .profile-header {
+        flex-direction: column !important;
+        align-items: center !important;
+        text-align: center !important;
+        padding: 32px 20px 24px !important;
+        gap: 16px !important;
+    }
+
+    .profile-avatar img, 
+    .avatar-initials {
+        width: 85px !important;
+        height: 85px !important;
+    }
+
+    .profile-body {
+        padding: 24px 20px !important;
+    }
+
+    /* Las 3 cajas de estadísticas se apilan verticalmente para que se lean bien */
+    .stats-grid {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+    }
+
+    .stat-card {
+        padding: 16px !important;
+    }
+
+    .stat-card h3 {
+        font-size: 1.7rem !important;
+    }
+
+    /* Botones de acción ocupan todo el ancho (UI táctil cómoda) */
+    .profile-actions {
+        flex-direction: column !important;
+        width: 100%;
+        gap: 12px !important;
+    }
+
+    .btn-edit, 
+    .btn-delete {
+        width: 100% !important;
+        text-align: center;
+        padding: 14px !important;
+    }
+
+    /* Estilos para el botón de cerrar sesión en la cabecera móvil */
+    .content-header {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        width: 100%;
+    }
+
+    .mobile-logout-btn {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: #fee2e2; /* Fondo suave rojizo */
+        color: #b91c1c; /* Icono rojo de alerta */
+        border-radius: 10px;
+        font-size: 1.2rem;
+        text-decoration: none;
+        transition: background 0.2s;
+    }
+
+    .mobile-logout-btn:active {
+        background: #fca5a5;
+    }
+
+    .form-group input[type="file"] {
+        font-size: 0.85rem;
+    }
+}

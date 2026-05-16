@@ -547,96 +547,96 @@ body.calendar-page {
     }
 
 
-        /* ... (mantén tus estilos previos de body, calendar-main y columns igual) ... */
+    /* ... (mantén tus estilos previos de body, calendar-main y columns igual) ... */
 
-        /* 4. RECORRECCIÓN DE LA SIDEBAR (Asegurar que vaya abajo) */
-        .sidebar {
-            position: fixed !important;
-            bottom: 0 !important;
-            top: auto !important;
-            /* Forzamos a que anule el posicionamiento superior de escritorio */
-            left: 0;
-            right: 0;
-            width: 100% !important;
-            height: 70px !important;
-            /* Un poquito más de aire para los pulgares */
-            background: #0f172a;
-            z-index: 9999;
-            /* Asegura que se superponga a las tarjetas al hacer scroll */
-            display: flex !important;
-            flex-direction: row !important;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 16px !important;
-            box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.3);
-            border-radius: 16px 16px 0 0;
-        }
-
-        /* Forzar que el contenedor principal respire por arriba al no tener la barra estorbando */
-        .calendar-main {
-            padding-top: 20px !important;
-            padding-bottom: 90px !important;
-            /* Espacio para que las tarjetas no se escondan detrás de la barra */
-        }
-
-        /* Ocultar elementos sobrantes */
-        .sidebar-logo,
-        .nav-divider,
-        .sidebar-footer,
-        .nav-item.logout {
-            display: none !important;
-        }
-
-        .sidebar-nav {
-            display: flex !important;
-            flex-direction: row !important;
-            justify-content: space-around;
-            align-items: center;
-            width: 100%;
-            margin: 0 !important;
-            padding: 0 !important;
-        }
-
-        .nav-item {
-            display: flex !important;
-            flex-direction: column !important;
-            align-items: center !important;
-            justify-content: center !important;
-            gap: 4px !important;
-            font-size: 0.7rem !important;
-            color: #94a3b8;
-            padding: 8px 12px !important;
-            width: auto !important;
-            background: transparent !important;
-            position: relative;
-        }
-
-        /* Arreglo del icono de Actividades (eliminar interferencias visuales de escritorio) */
-        .nav-item i {
-            font-size: 1.3rem !important;
-            line-height: 1 !important;
-        }
-
-        /* 5. CORRECCIÓN DEL INDICADOR ACTIVO (El recuadro desalineado con la 'T') */
-        .nav-item.active {
-            background: transparent !important;
-            /* Quitamos fondos raros en móvil */
-            color: #5ba4cf !important;
-        }
-
-        /* Reubicamos la barrita indicadora de pestaña activa en la parte superior del botón */
-        .nav-item.active::after {
-            content: "" !important;
-            position: absolute !important;
-            top: -6px !important;
-            /* Se sitúa justo en el borde superior interno de la barra */
-            left: 50% !important;
-            transform: translateX(-50%) !important;
-            width: 30px !important;
-            height: 4px !important;
-            background-color: #5ba4cf !important;
-            /* Color de tu diseño original */
-            border-radius: 0 0 4px 4px !important;
-            box-shadow: 0 2px 8px rgba(91, 164, 207, 0.6) !important;
-        }
+    /* 4. RECORRECCIÓN DE LA SIDEBAR (Asegurar que vaya abajo) */
+    .sidebar {
+        position: fixed !important;
+        bottom: 0 !important;
+        top: auto !important;
+        /* Forzamos a que anule el posicionamiento superior de escritorio */
+        left: 0;
+        right: 0;
+        width: 100% !important;
+        height: 70px !important;
+        /* Un poquito más de aire para los pulgares */
+        background: #0f172a;
+        z-index: 9999;
+        /* Asegura que se superponga a las tarjetas al hacer scroll */
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 16px !important;
+        box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.3);
+        border-radius: 16px 16px 0 0;
     }
+
+    /* Forzar que el contenedor principal respire por arriba al no tener la barra estorbando */
+    .calendar-main {
+        padding-top: 20px !important;
+        padding-bottom: 90px !important;
+        /* Espacio para que las tarjetas no se escondan detrás de la barra */
+    }
+
+    /* Ocultar elementos sobrantes */
+    .sidebar-logo,
+    .nav-divider,
+    .sidebar-footer,
+    .nav-item.logout {
+        display: none !important;
+    }
+
+    .sidebar-nav {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-around;
+        align-items: center;
+        width: 100%;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .nav-item {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 4px !important;
+        font-size: 0.7rem !important;
+        color: #94a3b8;
+        padding: 8px 12px !important;
+        width: auto !important;
+        background: transparent !important;
+        position: relative;
+    }
+
+    /* Arreglo del icono de Actividades (eliminar interferencias visuales de escritorio) */
+    .nav-item i {
+        font-size: 1.3rem !important;
+        line-height: 1 !important;
+    }
+
+    /* 5. CORRECCIÓN DEL INDICADOR ACTIVO (El recuadro desalineado con la 'T') */
+    .nav-item.active {
+        background: transparent !important;
+        /* Quitamos fondos raros en móvil */
+        color: #5ba4cf !important;
+    }
+
+    /* Reubicamos la barrita indicadora de pestaña activa en la parte superior del botón */
+    .nav-item.active::after {
+        content: "" !important;
+        position: absolute !important;
+        top: -6px !important;
+        /* Se sitúa justo en el borde superior interno de la barra */
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        width: 30px !important;
+        height: 4px !important;
+        background-color: #5ba4cf !important;
+        /* Color de tu diseño original */
+        border-radius: 0 0 4px 4px !important;
+        box-shadow: 0 2px 8px rgba(91, 164, 207, 0.6) !important;
+    }
+}
