@@ -91,7 +91,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
     if ($_POST['accion'] === 'eliminar') {
         mysqli_query($conexion, "DELETE FROM usuarios WHERE id = $usuario_id");
         session_destroy();
-        header("Location: ../../frontend/html/index.php?eliminado=1");
+        header("Location: ../../public/views/index.php?eliminado=1");
         exit();
     }
 }
