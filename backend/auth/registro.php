@@ -1,5 +1,6 @@
 <?php
-include_once '../config/conexion.php';
+// include_once '../config/conexion.php';
+require_once __DIR__ . '/../config/conexion.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nombre = mysqli_real_escape_string($conexion, $_POST['nombre']);

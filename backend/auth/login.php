@@ -1,6 +1,7 @@
 <?php
 session_start();
-include_once '../config/conexion.php';
+// include_once '../config/conexion.php';
+require_once __DIR__ . '/../config/conexion.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = mysqli_real_escape_string($conexion, $_POST['email']);
@@ -18,7 +19,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: ../../frontend/html/calendar.php");
             exit();
         } else {
-            header("Location: ../../frontend/html/index.php?error=auth");
+            // <-- LO NUEVO: Cambiamos 'auth' por 'password' para que JS sepa que la contraseña falló
+            header("Location: ../../frontend/html/index.php?error=password"); 
             exit();
         }
     } else {

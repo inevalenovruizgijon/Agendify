@@ -2,7 +2,7 @@
 $host = "localhost";
 $user = "root";
 $pass = "toor";
-$db   = "agendify_db";
+$db   = "agendify";
 
 $conexion = mysqli_connect($host, $user, $pass, $db);
 
