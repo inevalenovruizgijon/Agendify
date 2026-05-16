@@ -180,8 +180,10 @@ if ($estado !== 'realizada') {
     <title>Actividades | Agendify</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link rel="stylesheet" href="../css/calendar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
     <link rel="stylesheet" href="../css/actividades.css">
+    <link rel="stylesheet" href="../css/calendar.css">
+
 </head>
 <body class="calendar-page">
 
