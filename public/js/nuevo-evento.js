@@ -75,3 +75,33 @@ function marcarRealizada(id) {
     })
     .catch(() => alert('Error de conexión.'));
 }
+
+
+document.addEventListener("DOMContentLoaded", function() {
+    const openMenuBtn = document.getElementById("openMenuBtn");
+    const closeMenuBtn = document.getElementById("closeMenuBtn");
+    const sidebarMenu = document.getElementById("sidebarMenu");
+
+    // Abrir menú
+    if (openMenuBtn && sidebarMenu) {
+        openMenuBtn.addEventListener("click", () => {
+            sidebarMenu.classList.add("active");
+        });
+    }
+
+    // Cerrar menú
+    if (closeMenuBtn && sidebarMenu) {
+        closeMenuBtn.addEventListener("click", () => {
+            sidebarMenu.classList.remove("active");
+        });
+    }
+
+    // Opcional: Cerrar el menú si se hace clic fuera de él
+    document.addEventListener("click", (event) => {
+        if (sidebarMenu && sidebarMenu.classList.contains("active")) {
+            if (!sidebarMenu.contains(event.target) && !openMenuBtn.contains(event.target)) {
+                sidebarMenu.classList.remove("active");
+            }
+        }
+    });
+});
