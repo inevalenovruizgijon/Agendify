@@ -1,3 +1,33 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: index.php");
+    exit();
+}
+
+require_once '../../backend/config/conexion.php';
+
+$usuario_id = $_SESSION['usuario_id'];
+
+// ── Obtener actividades para el calendario ──
+$res = mysqli_query($conexion,
+     "SELECT id, fecha, hora, titulo, prioridad FROM actividades
+     WHERE usuario_id = $usuario_id
+     ORDER BY fecha ASC, hora ASC"
+);
+$actividades_json = [];
+while ($row = mysqli_fetch_assoc($res)) {
+    $actividades_json[] = [
+        'id'        => (int)$row['id'],
+    'fecha'     => $row['fecha'],
+    'hora'      => $row['hora'],
+    'titulo'    => htmlspecialchars($row['titulo']),
+    'prioridad' => $row['prioridad'],
+    ];
+}
+mysqli_close($conexion);
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,6 +38,8 @@
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/calendar.css">
 </head>
+
+<script src="../js/calendar.js"></script>
 <body class="calendar-page">
 
     <aside class="sidebar">
@@ -24,12 +56,11 @@
         <i class="ri-calendar-line"></i>
         <span>Calendario</span>
     </a>
-    <!-- ENLACE A ACTIVIDADES -->
     <a href="actividades.php" class="nav-item">
         <i class="ri-list-check"></i>
         <span>Actividades</span>
     </a>
-    <a href="#" class="nav-item">
+    <a href="profile.php" class="nav-item">
         <i class="ri-user-line"></i>
         <span>Perfil</span>
     </a>
@@ -114,6 +145,7 @@
         </form>
     </div>
 </div>
-    <script src="../js/calendar.js"></script>
+ <script>const ACTIVIDADES = <?= json_encode($actividades_json) ?>;</script>
+<script src="../js/calendar.js"></script>
 </body>
 </html>

@@ -16,15 +16,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $usuario['password'])) {
             $_SESSION['usuario_id'] = $usuario['id'];
             $_SESSION['usuario_nombre'] = $usuario['nombre'];
-            header("Location: ../../frontend/html/calendar.php");
+            header("Location: ../../public/views/calendar.php");
             exit();
         } else {
-            // <-- LO NUEVO: Cambiamos 'auth' por 'password' para que JS sepa que la contraseña falló
+
             header("Location: ../../frontend/html/index.php?error=password"); 
+
+           
             exit();
         }
     } else {
-        header("Location: ../../frontend/html/index.php?error=auth");
+        header("Location: ../../public/views/index.php?error=auth");
         exit();
     }
 }
