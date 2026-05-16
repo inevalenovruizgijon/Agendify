@@ -1,29 +1,41 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
 :root {
     --sidebar-bg: #0a1931;
     --main-bg: #f4f9ff;
     --accent: #5ba4cf;
-    --text-dark: #0a1931;
-    --white: #ffffff;
-    --border: rgba(0, 0, 0, 0.08);
+    --font-main: 'Plus Jakarta Sans', sans-serif;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: var(--font-main); /* Aplica la fuente a TODO */
+}
+
+body {
+    background-color: var(--main-bg);
+    color: #334155;
+    -webkit-font-smoothing: antialiased; /* Mejora la legibilidad en Mac/Chrome */
 }
 
 .sidebar {
     width: 260px;
+    height: 100vh; /* Se mantiene fijo al alto de la pantalla */
     background-color: var(--sidebar-bg);
     color: white;
     display: flex;
     flex-direction: column;
     padding: 30px 20px;
     flex-shrink: 0;
+    position: sticky;
+    top: 0;
     z-index: 10;
 }
 
+
+/* Logo y Branding */
 .sidebar-logo {
     display: flex;
     align-items: center;
@@ -31,25 +43,82 @@
     margin-bottom: 50px;
 }
 
-.sidebar-logo i { font-size: 2rem; color: var(--accent); }
-.brand-name { display: block; font-size: 1.4rem; font-weight: 800; }
-.brand-sub { font-size: 0.7rem; color: var(--accent); text-transform: uppercase; }
+.sidebar-logo i { 
+    font-size: 2rem; 
+    color: var(--accent); 
+}
 
-.sidebar-nav { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.brand-name { 
+    display: block; 
+    font-size: 1.4rem; 
+    font-weight: 800; 
+}
+
+.brand-sub { 
+    font-size: 0.7rem; 
+    color: var(--accent); 
+    text-transform: uppercase; 
+}
+
+/* Navegación */
+.sidebar-nav { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 8px; 
+}
 
 .nav-item {
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--nav-text-muted);
     padding: 14px 18px;
     border-radius: 12px;
     display: flex;
     align-items: center;
     gap: 12px;
     font-weight: 600;
-    transition: 0.3s;
+    transition: all 0.3s ease;
 }
 
-.nav-item:hover, .nav-item.active {
+/* Efecto hover suave sin estar pre-marcado */
+.nav-item:hover {
     background: rgba(91, 164, 207, 0.15);
     color: var(--accent);
+}
+
+/* Ítem de Cerrar Sesión al final */
+.nav-item.logout { 
+    color: rgba(255, 100, 100, 0.7); 
+    margin-top: auto; 
+}
+
+.nav-item.logout:hover { 
+    background: rgba(255, 80, 80, 0.1); 
+    color: #ff7070; 
+}
+
+.sidebar-footer {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.25);
+    text-align: center;
+    padding-top: 20px;
+}
+.nav-item.logout { 
+    /* Color de texto y fondo rojizo por defecto */
+    color: #ff7070; 
+    background: rgba(255, 80, 80, 0.1);
+    margin-top: auto; 
+    border: 1px solid rgba(255, 80, 80, 0.2);
+}
+
+.nav-item.logout:hover { 
+    /* Se intensifica ligeramente al pasar el ratón */
+    background: rgba(255, 80, 80, 0.2); 
+    color: #ff4d4d;
+    border-color: rgba(255, 80, 80, 0.4);
+}
+
+/* Ajuste opcional para el icono del botón rojo */
+.nav-item.logout i {
+    color: #ff7070;
 }

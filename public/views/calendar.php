@@ -37,6 +37,7 @@ mysqli_close($conexion);
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/calendar.css">
+    <link rel="stylesheet" href="../css/sidebar.css">
 </head>
 
 <body class="calendar-page">
@@ -49,32 +50,25 @@ mysqli_close($conexion);
                 <span class="brand-sub">Agencia Digital</span>
             </div>
         </div>
-
         <nav class="sidebar-nav">
-    <a href="calendar.php" class="nav-item active">
-        <i class="ri-calendar-line"></i>
-        <span>Calendario</span>
-    </a>
-    <a href="actividades.php" class="nav-item">
-        <i class="ri-list-check"></i>
-        <span>Actividades</span>
-    </a>
-    <a href="profile.php" class="nav-item">
-        <i class="ri-user-line"></i>
-        <span>Perfil</span>
-    </a>
-    <div class="nav-divider"></div>
-    <a href="index.php" class="nav-item logout">
-        <i class="ri-logout-box-line"></i>
-        <span>Cerrar sesión</span>
-    </a>
-</nav>
-
+            <a href="calendar.php" class="nav-item active">
+                <i class="ri-calendar-line"></i> <span>Calendario</span>
+            </a>
+            <a href="actividades.php" class="nav-item ">
+                <i class="ri-list-check"></i> <span>Actividades</span>
+            </a>
+            <a href="profile.php" class="nav-item">
+                <i class="ri-user-line"></i> <span>Perfil</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="../../backend/auth/logout.php" class="nav-item logout">
+                <i class="ri-logout-box-line"></i> <span>Cerrar sesión</span>
+            </a>
+        </nav>
         <div class="sidebar-footer">
             <p>© 2026 Agendify Team</p>
         </div>
     </aside>
-
     <main class="calendar-main">
         
         <header class="calendar-header">

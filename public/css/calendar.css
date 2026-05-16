@@ -21,35 +21,37 @@ body.calendar-page {
 }
 
 /* ── Sidebar ── */
-.sidebar {
-    width: 260px;
-    background-color: var(--sidebar-bg);
-    color: white;
-    display: flex;
-    flex-direction: column;
-    padding: 30px 20px;
-    flex-shrink: 0;
-    z-index: 10;
-}
-.sidebar-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 50px; }
-.sidebar-logo i { font-size: 2rem; color: var(--accent); }
-.brand-name { display: block; font-size: 1.4rem; font-weight: 800; }
-.brand-sub  { font-size: 0.7rem; color: var(--accent); text-transform: uppercase; }
-.sidebar-nav { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-.nav-item {
-    text-decoration: none; color: rgba(255,255,255,0.6);
-    padding: 14px 18px; border-radius: 12px;
-    display: flex; align-items: center; gap: 12px;
-    font-weight: 600; transition: .3s;
-}
-.nav-item:hover, .nav-item.active { background: rgba(91,164,207,.15); color: var(--accent); }
-.nav-divider { height: 1px; background: rgba(255,255,255,.08); margin: 8px 0; }
-.sidebar-footer { font-size: .72rem; color: rgba(255,255,255,.25); padding-top: 20px; }
 
 /* ── Main ── */
 .calendar-main {
     flex: 1; display: flex; flex-direction: column;
     padding: 20px 40px; height: 100vh; min-width: 0;
+}
+.nav-item.active {
+    background: rgba(91, 164, 207, 0.12); /* Fondo mucho más suave y transparente */
+    color: var(--accent);                /* Texto en azul claro */
+    opacity: 1;
+    position: relative;                  /* Necesario para posicionar la barrita */
+    font-weight: 700;
+}
+
+/* La barrita indicadora lateral (ahora más fina y elegante) */
+.nav-item.active::after {
+    content: "";
+    position: absolute;
+    right: 0;           /* Pegada al borde derecho */
+    top: 20%;           /* No ocupa todo el alto, se ve más moderno */
+    height: 60%;        /* Centrada verticalmente */
+    width: 3px;         /* Más fina */
+    background-color: var(--accent);
+    border-radius: 4px 0 0 4px; /* Bordes redondeados solo hacia adentro */
+    box-shadow: -2px 0 8px rgba(91, 164, 207, 0.5); /* Un pequeño brillo */
+}
+
+/* Aseguramos que el icono también brille un poco */
+.nav-item.active i {
+    color: var(--accent);
+    filter: drop-shadow(0 0 2px rgba(91, 164, 207, 0.3));
 }
 .calendar-header {
     display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-shrink: 0;
