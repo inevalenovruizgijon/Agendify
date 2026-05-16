@@ -39,7 +39,6 @@ mysqli_close($conexion);
     <link rel="stylesheet" href="../css/calendar.css">
 </head>
 
-<script src="../js/calendar.js"></script>
 <body class="calendar-page">
 
     <aside class="sidebar">

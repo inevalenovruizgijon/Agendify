@@ -1,3 +1,6 @@
+/* ════════════════════════════════════════
+   BASE  (igual que el original)
+════════════════════════════════════════ */
 :root {
     --sidebar-bg: #0a1931;
     --main-bg: #f4f9ff;
@@ -6,22 +9,18 @@
     --white: #ffffff;
     --border: rgba(0, 0, 0, 0.08);
 }
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
 body.calendar-page {
     font-family: 'Plus Jakarta Sans', sans-serif;
     display: flex;
     height: 100vh;
     width: 100vw;
-    overflow: hidden; 
+    overflow: hidden;
     background-color: var(--main-bg);
 }
 
+/* ── Sidebar ── */
 .sidebar {
     width: 260px;
     background-color: var(--sidebar-bg);
@@ -32,245 +31,334 @@ body.calendar-page {
     flex-shrink: 0;
     z-index: 10;
 }
-
-.sidebar-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    margin-bottom: 50px;
-}
-
+.sidebar-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 50px; }
 .sidebar-logo i { font-size: 2rem; color: var(--accent); }
 .brand-name { display: block; font-size: 1.4rem; font-weight: 800; }
-.brand-sub { font-size: 0.7rem; color: var(--accent); text-transform: uppercase; }
-
+.brand-sub  { font-size: 0.7rem; color: var(--accent); text-transform: uppercase; }
 .sidebar-nav { flex: 1; display: flex; flex-direction: column; gap: 8px; }
-
 .nav-item {
-    text-decoration: none;
-    color: rgba(255, 255, 255, 0.6);
-    padding: 14px 18px;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: 600;
-    transition: 0.3s;
+    text-decoration: none; color: rgba(255,255,255,0.6);
+    padding: 14px 18px; border-radius: 12px;
+    display: flex; align-items: center; gap: 12px;
+    font-weight: 600; transition: .3s;
 }
+.nav-item:hover, .nav-item.active { background: rgba(91,164,207,.15); color: var(--accent); }
+.nav-divider { height: 1px; background: rgba(255,255,255,.08); margin: 8px 0; }
+.sidebar-footer { font-size: .72rem; color: rgba(255,255,255,.25); padding-top: 20px; }
 
-.nav-item:hover, .nav-item.active {
-    background: rgba(91, 164, 207, 0.15);
-    color: var(--accent);
-}
-
+/* ── Main ── */
 .calendar-main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 20px 40px;
-    height: 100vh;
-    min-width: 0;
+    flex: 1; display: flex; flex-direction: column;
+    padding: 20px 40px; height: 100vh; min-width: 0;
 }
-
 .calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    flex-shrink: 0;
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-shrink: 0;
 }
-
 .header-info h1 { font-size: 2.2rem; font-weight: 800; color: var(--text-dark); }
 .header-info h1 span { font-weight: 400; color: var(--accent); }
-
 .calendar-controls { display: flex; align-items: center; gap: 8px; margin-top: 5px; }
-
 .btn-icon {
     background: white; border: 1px solid #e2e8f0; border-radius: 8px;
-    width: 32px; height: 32px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
 }
-
-.btn-today {
-    background: white; border: 1px solid #e2e8f0; padding: 5px 15px;
-    border-radius: 8px; font-weight: 700; cursor: pointer;
-}
-
+.btn-today { background: white; border: 1px solid #e2e8f0; padding: 5px 15px; border-radius: 8px; font-weight: 700; cursor: pointer; font-family: inherit; }
 .btn-add-event {
     background: var(--sidebar-bg); color: white; border: none;
     padding: 12px 20px; border-radius: 10px; font-weight: 700;
-    display: flex; align-items: center; gap: 8px; cursor: pointer;
+    display: flex; align-items: center; gap: 8px; cursor: pointer; font-family: inherit;
 }
 
+/* ── Contenedor calendario ── */
 .calendar-container {
-    background: var(--white);
-    border-radius: 20px;
-    padding: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
-    flex: 1; 
-    display: flex;
-    flex-direction: column;
-    min-height: 0; 
+    background: var(--white); border-radius: 20px; padding: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,.04);
+    flex: 1; display: flex; flex-direction: column; min-height: 0;
 }
-
 .calendar-grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    grid-template-rows: auto repeat(5, 1fr); 
-    height: 100%;
-    width: 100%;
+    grid-template-rows: auto repeat(5, 1fr);
+    height: 100%; width: 100%;
 }
-
 .day-name {
     text-align: center; font-weight: 800; color: #94a3b8;
-    font-size: 0.8rem; padding: 10px 0; border-bottom: 1px solid #f1f5f9;
+    font-size: .8rem; padding: 10px 0; border-bottom: 1px solid #f1f5f9;
 }
 
+/* ── Celda día ── */
 .day {
     border-right: 1px solid #f1f5f9;
     border-bottom: 1px solid #f1f5f9;
-    padding: 8px;
-    display: flex;
-    flex-direction: column;
+    padding: 7px 6px 5px;
+    display: flex; flex-direction: column; gap: 2px;
+    overflow: hidden; cursor: default;
+    transition: background .15s;
 }
-
 .day:nth-child(7n) { border-right: none; }
+.day.empty { background: #fafbfc; }
+.day.empty span { color: #cbd5e1; }
+.day.has-events { cursor: pointer; }
+.day.has-events:hover { background: #f8fafc; }
 
-.day span { font-weight: 700; color: #64748b; font-size: 0.9rem; }
-
-.calendar-footer {
-    padding: 15px 0;
-    flex-shrink: 0;
+/* Número de día — nuevo (reemplaza el <span> genérico) */
+.ag-day-num {
+    display: inline-block;
+    font-weight: 700; font-size: .85rem; color: #64748b;
+    line-height: 1; margin-bottom: 1px;
+}
+.current-day-highlight { background: #f0f7ff; }
+.current-day-highlight .ag-day-num {
+    background: var(--sidebar-bg); color: white;
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; font-size: .75rem;
 }
 
+/* ── Footer ── */
+.calendar-footer { padding: 15px 0; flex-shrink: 0; }
 .view-list {
     text-decoration: none; color: var(--text-dark);
     font-weight: 700; display: flex; align-items: center; gap: 10px;
 }
 
-.modal-overlay {
-    position: fixed; 
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(10, 25, 49, 0.7);
-    backdrop-filter: blur(4px);
+/* ════════════════════════════════════════
+   NUEVO — CHIPS DE ACTIVIDAD APILADOS
+════════════════════════════════════════ */
+.ag-chips {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10000; 
-    opacity: 0;
-    visibility: hidden;
-    transition: 0.3s ease;
-}
-
-.modal-overlay.active {
-    opacity: 1;
-    visibility: visible;
-}
-
-.event-card {
-    background: #e2e8f0;
-    width: 90%;
-    max-width: 500px;
-    border-radius: 12px;
+    flex-direction: column;
+    gap: 2px;
     overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
 
-.event-modal-header {
-    background: var(--sidebar-bg);
-    color: white;
-    padding: 15px 25px;
+/* Chip individual */
+.ag-chip {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 3px;
+    background: var(--cb, #f1f5f9);
+    color: var(--ct, #334155);
+    border-left: 3px solid var(--cd, #94a3b8);
+    border-radius: 0 5px 5px 0;
+    padding: 2px 5px 2px 4px;
+    font-size: 0.68rem;
+    font-weight: 600;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: filter .15s, transform .1s;
+    max-width: 100%;
+    line-height: 1.5;
+}
+.ag-chip:hover { filter: brightness(.93); transform: translateX(1px); }
+
+.ag-chip__dot {
+    flex-shrink: 0;
+    width: 5px; height: 5px; border-radius: 50%;
+    background: var(--cd, #94a3b8);
+}
+.ag-chip__time {
+    flex-shrink: 0;
+    font-size: .6rem; opacity: .7;
+    font-variant-numeric: tabular-nums;
+}
+.ag-chip__name {
+    overflow: hidden; white-space: nowrap; text-overflow: ellipsis; flex: 1; min-width: 0;
 }
 
-.event-form { padding: 25px; display: flex; flex-direction: column; gap: 15px; }
-
-.input-group { display: flex; flex-direction: column; gap: 5px; }
-.input-group label { font-weight: 700; font-size: 0.9rem; color: var(--text-dark); }
-
-.input-group input, .input-group textarea {
-    padding: 10px; border: 1px solid #cbd5e1;
-    background: #f1f5f9; border-radius: 6px; outline: none;
+/* "+X más" */
+.ag-chip-more {
+    font-size: .62rem; font-weight: 700; color: #94a3b8;
+    padding: 1px 4px; border-radius: 4px;
+    background: #f1f5f9; text-align: center; cursor: pointer;
 }
+.ag-chip-more:hover { background: #e2e8f0; color: #64748b; }
 
-.input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-
-.event-modal-actions {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px;
-}
-
-.btn-create {
-    background: var(--sidebar-bg); color: white; border: none;
-    padding: 12px; border-radius: 6px; font-weight: 700; cursor: pointer;
-}
-
-.btn-cancel {
-    background: white; color: var(--text-dark); border: 1px solid var(--text-dark);
-    padding: 12px; border-radius: 6px; font-weight: 700; cursor: pointer;
-}
-
-.activity-popup {
-    position: absolute;
-    z-index: 99999;
+/* ════════════════════════════════════════
+   NUEVO — POPUP INDIVIDUAL (chip click)
+════════════════════════════════════════ */
+.ag-popup {
     background: #fff;
     border-radius: 12px;
-    width: 280px;
-    box-shadow: 0 8px 32px rgba(10,25,49,0.18);
-    border: 0.5px solid rgba(0,0,0,0.08);
+    width: 270px;
+    box-shadow: 0 8px 32px rgba(10,25,49,.2);
+    border: 1px solid rgba(0,0,0,.07);
     overflow: hidden;
-    animation: popIn 0.15s ease;
+    animation: agPopIn .15s ease;
 }
-@keyframes popIn {
-    from { opacity: 0; transform: translateY(-6px); }
-    to   { opacity: 1; transform: translateY(0); }
+@keyframes agPopIn {
+    from { opacity:0; transform: translateY(-6px); }
+    to   { opacity:1; transform: translateY(0); }
 }
-.pop-header {
-    background: var(--sidebar-bg);
-    color: #fff;
-    padding: 12px 16px;
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 8px;
+.ag-popup__head {
+    background: var(--sidebar-bg); color: #fff;
+    padding: 11px 14px;
+    display: flex; justify-content: space-between; align-items: flex-start; gap: 8px;
+    font-size: 13px; font-weight: 600; line-height: 1.3;
 }
-.pop-title { font-size: 14px; font-weight: 600; line-height: 1.3; }
-.pop-close {
-    background: none; border: none; color: rgba(255,255,255,0.6);
-    font-size: 20px; cursor: pointer; line-height: 1; flex-shrink: 0;
+.ag-popup__x {
+    background: none; border: none; color: rgba(255,255,255,.5);
+    font-size: 14px; cursor: pointer; flex-shrink: 0; line-height: 1;
+    transition: color .15s;
 }
-.pop-meta {
-    padding: 12px 16px;
-    display: flex; flex-direction: column; gap: 6px;
-    border-bottom: 0.5px solid #f1f5f9;
+.ag-popup__x:hover { color: white; }
+.ag-popup__meta {
+    padding: 10px 14px; display: flex; flex-direction: column; gap: 5px;
+    border-bottom: 1px solid #f1f5f9;
 }
-.pop-badge {
+.ag-popup__date { font-size: 11px; color: #64748b; }
+
+/* Badge reutilizable */
+.ag-badge {
     display: inline-flex; align-items: center; gap: 5px;
-    font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
-}
-.pop-badge--alta   { background: #fee2e2; color: #b91c1c; }
-.pop-badge--media  { background: #fef3c7; color: #92400e; }
-.pop-badge--baja   { background: #dcfce7; color: #166534; }
-.pop-date { font-size: 12px; color: #64748b; }
-.pop-actions {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-}
-.pop-btn {
-    border: none; background: none;
-    padding: 12px 6px;
-    cursor: pointer;
-    display: flex; flex-direction: column; align-items: center; gap: 4px;
     font-size: 11px; font-weight: 700;
-    transition: background 0.15s;
-    border-top: 0.5px solid #f1f5f9;
+    padding: 2px 9px 2px 7px; border-radius: 20px; width: fit-content;
 }
-.pop-btn:not(:last-child) { border-right: 0.5px solid #f1f5f9; }
-.pop-btn svg { width: 18px; height: 18px; }
-.pop-btn--done   { color: #16a34a; }
-.pop-btn--edit   { color: #5ba4cf; }
-.pop-btn--delete { color: #dc2626; }
-.pop-btn:hover   { background: #f8fafc; }
+.ag-dot {
+    width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0;
+}
+
+.ag-popup__actions {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+}
+.ag-act {
+    border: none; background: none; font-family: inherit;
+    padding: 10px 4px; cursor: pointer;
+    font-size: 11px; font-weight: 700;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    border-top: 1px solid #f1f5f9;
+    transition: background .15s;
+}
+.ag-act:not(:last-child) { border-right: 1px solid #f1f5f9; }
+.ag-act:hover { background: #f8fafc; }
+.ag-act--ok  { color: #16a34a; }
+.ag-act--ed  { color: #5ba4cf; }
+.ag-act--del { color: #dc2626; }
+
+/* ════════════════════════════════════════
+   NUEVO — MODAL DEL DÍA (celda click)
+════════════════════════════════════════ */
+.ag-day-modal {
+    position: fixed; inset: 0; z-index: 50000;
+    background: rgba(10,25,49,.55);
+    backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity .22s ease;
+}
+.ag-day-modal--in { opacity: 1; }
+.ag-day-modal--in .ag-day-modal__card { transform: translateY(0); }
+
+.ag-day-modal__card {
+    background: white; border-radius: 18px;
+    width: 90%; max-width: 450px; max-height: 80vh;
+    display: flex; flex-direction: column; overflow: hidden;
+    box-shadow: 0 24px 60px rgba(10,25,49,.25);
+    transform: translateY(14px); transition: transform .22s ease;
+}
+.ag-day-modal__head {
+    background: var(--sidebar-bg); color: white;
+    padding: 16px 20px;
+    display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;
+}
+.ag-day-modal__head small {
+    display: block; font-size: .68rem; font-weight: 700;
+    letter-spacing: .07em; text-transform: uppercase; color: var(--accent); margin-bottom: 3px;
+}
+.ag-day-modal__head strong { font-size: 1rem; font-weight: 800; }
+.ag-day-modal__x {
+    background: rgba(255,255,255,.12); border: none; color: white;
+    width: 30px; height: 30px; border-radius: 8px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; flex-shrink: 0; transition: background .15s;
+}
+.ag-day-modal__x:hover { background: rgba(255,255,255,.25); }
+
+.ag-day-modal__count {
+    padding: 9px 20px 7px; font-size: .75rem; font-weight: 700; color: #94a3b8;
+    border-bottom: 1px solid #f1f5f9; flex-shrink: 0;
+}
+.ag-day-modal__list {
+    overflow-y: auto; flex: 1; padding: 8px 12px;
+    display: flex; flex-direction: column; gap: 6px;
+}
+.ag-day-modal__list::-webkit-scrollbar { width: 3px; }
+.ag-day-modal__list::-webkit-scrollbar-thumb { background: #e2e8f0; border-radius: 3px; }
+.ag-day-modal__foot {
+    padding: 11px 20px 14px; border-top: 1px solid #f1f5f9; flex-shrink: 0;
+}
+.ag-day-modal__foot a {
+    text-decoration: none; font-size: .8rem; font-weight: 700; color: var(--accent);
+}
+.ag-day-modal__foot a:hover { color: var(--sidebar-bg); }
+
+/* Fila de actividad dentro del modal de día */
+.ag-dm-row {
+    display: flex; align-items: center; gap: 9px;
+    padding: 8px 10px; border-radius: 10px;
+    background: #f8fafc; border: 1px solid #f1f5f9;
+    transition: background .15s;
+}
+.ag-dm-row:hover { background: #f1f5f9; }
+.ag-dm-bar { width: 4px; height: 34px; border-radius: 4px; flex-shrink: 0; }
+.ag-dm-time {
+    font-size: .7rem; font-weight: 700; color: #94a3b8;
+    font-variant-numeric: tabular-nums; min-width: 34px; flex-shrink: 0;
+}
+.ag-dm-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+.ag-dm-title {
+    font-size: .83rem; font-weight: 700; color: var(--text-dark);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.ag-dm-btns { display: flex; gap: 4px; flex-shrink: 0; }
+.ag-dm-btn {
+    border: none; border-radius: 7px;
+    width: 27px; height: 27px; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; transition: background .15s;
+}
+.ag-dm-btn--ed  { background: #eff6ff; color: #3b82f6; }
+.ag-dm-btn--del { background: #fef2f2; color: #ef4444; }
+.ag-dm-btn--ed:hover  { background: #dbeafe; }
+.ag-dm-btn--del:hover { background: #fee2e2; }
+
+/* ════════════════════════════════════════
+   MODAL NUEVO EVENTO  (igual que antes)
+════════════════════════════════════════ */
+.modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(10,25,49,.7); backdrop-filter: blur(4px);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 10000; opacity: 0; visibility: hidden; transition: .3s ease;
+}
+.modal-overlay.active { opacity: 1; visibility: visible; }
+.event-card {
+    background: #e2e8f0; width: 90%; max-width: 500px;
+    border-radius: 12px; overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,.3);
+}
+.event-modal-header {
+    background: var(--sidebar-bg); color: white;
+    padding: 15px 25px; display: flex; justify-content: space-between; align-items: center;
+}
+.event-form { padding: 25px; display: flex; flex-direction: column; gap: 15px; }
+.input-group { display: flex; flex-direction: column; gap: 5px; }
+.input-group label { font-weight: 700; font-size: .9rem; color: var(--text-dark); }
+.input-group input, .input-group textarea {
+    padding: 10px; border: 1px solid #cbd5e1;
+    background: #f1f5f9; border-radius: 6px; outline: none; font-family: inherit;
+}
+.input-row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.event-modal-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; }
+.btn-create {
+    background: var(--sidebar-bg); color: white; border: none;
+    padding: 12px; border-radius: 6px; font-weight: 700; cursor: pointer; font-family: inherit;
+}
+.btn-cancel {
+    background: white; color: var(--text-dark); border: 1px solid var(--text-dark);
+    padding: 12px; border-radius: 6px; font-weight: 700; cursor: pointer; font-family: inherit;
+}
+.close-modal {
+    background: none; border: none; color: rgba(255,255,255,.6);
+    font-size: 1.5rem; cursor: pointer; line-height: 1;
+}
+.close-modal:hover { color: white; }
