@@ -3,7 +3,7 @@ session_start(); // Inicia la sesión para acceder a los datos del usuario
 
 // Si el usuario no ha iniciado sesión, lo redirige al login
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: ../../frontend/html/index.php");
+    header("Location: ../../public/views/index.php");
     exit();
 }
 
