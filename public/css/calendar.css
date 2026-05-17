@@ -36,34 +36,24 @@ body.calendar-page {
 
 .nav-item.active {
     background: rgba(91, 164, 207, 0.12);
-    /* Fondo mucho más suave y transparente */
     color: var(--accent);
-    /* Texto en azul claro */
     opacity: 1;
     position: relative;
-    /* Necesario para posicionar la barrita */
     font-weight: 700;
 }
 
-/* La barrita indicadora lateral (ahora más fina y elegante) */
 .nav-item.active::after {
     content: "";
     position: absolute;
     right: 0;
-    /* Pegada al borde derecho */
     top: 20%;
-    /* No ocupa todo el alto, se ve más moderno */
     height: 60%;
-    /* Centrada verticalmente */
     width: 3px;
-    /* Más fina */
     background-color: var(--accent);
     border-radius: 4px 0 0 4px;
-    /* Bordes redondeados solo hacia adentro */
     box-shadow: -2px 0 8px rgba(91, 164, 207, 0.5);
 }
 
-/* Aseguramos que el icono también brille un poco */
 .nav-item.active i {
     color: var(--accent);
     filter: drop-shadow(0 0 2px rgba(91, 164, 207, 0.3));
@@ -131,7 +121,6 @@ body.calendar-page {
     font-family: inherit;
 }
 
-/* ── Contenedor calendario ── */
 .calendar-container {
     background: var(--white);
     border-radius: 20px;
@@ -160,7 +149,6 @@ body.calendar-page {
     border-bottom: 1px solid #f1f5f9;
 }
 
-/* ── Celda día ── */
 .day {
     border-right: 1px solid #f1f5f9;
     border-bottom: 1px solid #f1f5f9;
@@ -193,7 +181,6 @@ body.calendar-page {
     background: #f8fafc;
 }
 
-/* Número de día — nuevo (reemplaza el <span> genérico) */
 .ag-day-num {
     display: inline-block;
     font-weight: 700;
@@ -219,7 +206,6 @@ body.calendar-page {
     font-size: .75rem;
 }
 
-/* ── Footer ── */
 .calendar-footer {
     padding: 15px 0;
     flex-shrink: 0;
@@ -234,9 +220,7 @@ body.calendar-page {
     gap: 10px;
 }
 
-/* ════════════════════════════════════════
-   NUEVO — CHIPS DE ACTIVIDAD APILADOS
-════════════════════════════════════════ */
+
 .ag-chips {
     display: flex;
     flex-direction: column;
@@ -244,7 +228,6 @@ body.calendar-page {
     overflow: hidden;
 }
 
-/* Chip individual */
 .ag-chip {
     display: flex;
     align-items: center;
@@ -292,7 +275,6 @@ body.calendar-page {
     min-width: 0;
 }
 
-/* "+X más" */
 .ag-chip-more {
     font-size: .62rem;
     font-weight: 700;
@@ -309,9 +291,7 @@ body.calendar-page {
     color: #64748b;
 }
 
-/* ════════════════════════════════════════
-   NUEVO — POPUP INDIVIDUAL (chip click)
-════════════════════════════════════════ */
+
 .ag-popup {
     background: #fff;
     border-radius: 12px;
@@ -375,7 +355,6 @@ body.calendar-page {
     color: #64748b;
 }
 
-/* Badge reutilizable */
 .ag-badge {
     display: inline-flex;
     align-items: center;
@@ -435,9 +414,7 @@ body.calendar-page {
     color: #dc2626;
 }
 
-/* ════════════════════════════════════════
-   NUEVO — MODAL DEL DÍA (celda click)
-════════════════════════════════════════ */
+
 .ag-day-modal {
     position: fixed;
     inset: 0;
@@ -562,7 +539,6 @@ body.calendar-page {
     color: var(--sidebar-bg);
 }
 
-/* Fila de actividad dentro del modal de día */
 .ag-dm-row {
     display: flex;
     align-items: center;
@@ -648,9 +624,7 @@ body.calendar-page {
     background: #fee2e2;
 }
 
-/* ════════════════════════════════════════
-   MODAL NUEVO EVENTO  (igual que antes)
-════════════════════════════════════════ */
+
 .modal-overlay {
     position: fixed;
     top: 0;
@@ -769,25 +743,20 @@ body.calendar-page {
 }
 
 
-/* ==========================================================================
-   ADAPTACIÓN MÓVIL PARA EL CALENDARIO (PANTALLAS MENORES A 768px)
-   ========================================================================== */
 @media (max-width: 768px) {
     
-    /* 1. Ajustes del contenedor base */
     body.calendar-page {
-        overflow: hidden; /* Evitamos scroll doble indeseado */
+        overflow: hidden; 
         display: flex;
         flex-direction: column;
     }
 
     .calendar-main {
-        padding: 16px 16px 85px 16px !important; /* Espacio abajo para la barra de navegación */
+        padding: 16px 16px 85px 16px !important;
         height: 100vh;
         width: 100vw;
     }
 
-    /* 2. Cabecera del Calendario Adaptada */
     .calendar-header {
         flex-direction: column;
         align-items: stretch;
@@ -804,17 +773,16 @@ body.calendar-page {
     }
 
     .header-info h1 {
-        font-size: 1.5rem !important; /* Mes y año balanceados */
+        font-size: 1.5rem !important;
     }
 
     .calendar-controls {
         margin-top: 0;
     }
 
-    /* Transformación del botón "Nuevo Evento" a botón circular flotante */
     .btn-add-event {
         position: fixed;
-        bottom: 90px; /* Justo encima de la barra de navegación inferior */
+        bottom: 90px; 
         right: 20px;
         z-index: 998;
         padding: 14px;
@@ -826,14 +794,13 @@ body.calendar-page {
     }
 
     .btn-add-event span {
-        display: none !important; /* Oculta el texto "Nuevo evento" */
+        display: none !important; 
     }
 
     .btn-add-event i {
         font-size: 1.5rem;
     }
 
-    /* 3. Optimización de la Rejilla del Calendario */
     .calendar-container {
         border-radius: 16px;
         padding: 8px;
@@ -845,14 +812,13 @@ body.calendar-page {
         padding: 6px 0;
     }
 
-    /* Forzar que las celdas se distribuyan equitativamente sin colapsar */
     .calendar-grid {
         height: 100%;
     }
 
     .day {
         padding: 4px 2px;
-        align-items: center; /* Centramos el número del día */
+        align-items: center;
         justify-content: flex-start;
         position: relative;
         min-height: 50px;
@@ -862,13 +828,10 @@ body.calendar-page {
         font-size: 0.8rem;
     }
 
-    /* 4. Minimalismo de Actividades en la Celda (Modo Móvil) */
-    /* Ocultamos los chips de texto completos en la cuadrícula general */
     .day .ag-chip {
         display: none !important; 
     }
 
-    /* Transformamos los contenedores de actividades en puntos/dots indicadores */
     .day .ag-chips {
         position: absolute;
         bottom: 6px;
@@ -879,7 +842,6 @@ body.calendar-page {
         left: 0;
     }
 
-    /* Generamos un puntito estilizado simulando eventos pendientes */
     .day.has-events::after {
         content: "";
         position: absolute;
@@ -892,7 +854,6 @@ body.calendar-page {
         background-color: var(--accent);
     }
 
-    /* 5. BARRA DE NAVEGACIÓN INFERIOR INTEGRADA (Mismo estilo que Actividades) */
     .sidebar {
         position: fixed !important;
         bottom: 0 !important;
@@ -901,7 +862,7 @@ body.calendar-page {
         right: 0;
         width: 100% !important;
         height: 70px !important;
-        background: #0a1931; /* Var(--sidebar-bg) */
+        background: #0a1931; 
         z-index: 9999;
         display: flex !important;
         flex-direction: row !important;
@@ -912,7 +873,6 @@ body.calendar-page {
         border-radius: 16px 16px 0 0;
     }
 
-    /* Ocultar elementos incompatibles con el formato mobile-bar */
     .sidebar-logo, 
     .nav-divider, 
     .sidebar-footer,
@@ -949,7 +909,6 @@ body.calendar-page {
         line-height: 1 !important;
     }
 
-    /* Pestaña Activa de la Barra Inferior */
     .nav-item.active {
         background: transparent !important;
         color: var(--accent) !important; 
@@ -968,7 +927,6 @@ body.calendar-page {
         box-shadow: 0 2px 8px rgba(91, 164, 207, 0.6) !important;
     }
 
-    /* 6. Optimización de los Modales y Formularios en Móvil */
     .ag-day-modal__card, .event-card {
         width: 92% !important;
         max-height: 85vh !important;
@@ -980,11 +938,11 @@ body.calendar-page {
     }
 
     .input-row {
-        grid-template-columns: 1fr; /* Fecha y Hora pasan a estar uno abajo del otro */
+        grid-template-columns: 1fr; 
         gap: 12px;
     }
     
     .calendar-footer {
-        display: none; /* Ocultamos el enlace de pie de página tradicional ya que usamos la barra principal */
+        display: none; 
     }
 }
