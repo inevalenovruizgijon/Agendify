@@ -18,7 +18,6 @@ body {
     overflow-x: hidden;
 }
 
-/* NAVBAR FLUIDA */
 .navbar {
     background-color: var(--white);
     height: 80px;
@@ -359,7 +358,6 @@ body {
     border-color: #bbf7d0 !important;
 }
 
-/* Utilidad para ocultar */
 .d-none {
     display: none !important;
 }
