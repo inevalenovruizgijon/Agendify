@@ -84,7 +84,7 @@ echo json_encode([
 ]);
 
 
-// ── Función de envío ──────────────────────────────────────────────────────────
+//Función de envío
 function enviarRecordatorio(string $email, string $nombre, string $titulo, string $descripcion, string $fecha, int $minutos): bool
 {
     if ($minutos >= 1440) {
@@ -127,7 +127,7 @@ function enviarRecordatorio(string $email, string $nombre, string $titulo, strin
 }
 
 
-// ── Plantilla del email ───────────────────────────────────────────────────────
+//Plantilla del email
 function plantillaEmail(string $nombre, string $titulo, string $descripcion, string $fecha, string $cuando): string
 {
     $desc = $descripcion ? "<p style='color:#555;margin:0 0 16px'>$descripcion</p>" : '';
