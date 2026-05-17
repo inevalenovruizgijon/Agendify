@@ -19,66 +19,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['accion'])) {
 
     // EDITAR perfil del usuario
     if ($_POST['accion'] === 'editar') {
-        // Limpia y escapa los campos de texto para evitar inyección SQL
+        // Limpia y escapa los campos de texto
         $nombre = trim(mysqli_real_escape_string($conexion, $_POST['nombre']));
         $email  = trim(mysqli_real_escape_string($conexion, $_POST['email']));
         $bio    = trim(mysqli_real_escape_string($conexion, $_POST['bio']));
 
         // Comprueba que el email no esté siendo usado por otro usuario
         $check = mysqli_query($conexion, "SELECT id FROM usuarios WHERE email = '$email' AND id != $usuario_id");
+        
         if (mysqli_num_rows($check) > 0) {
             $mensaje_error = 'Ese email ya está en uso por otra cuenta.';
         } else {
+            // Ejecutamos la actualización (ya no hay fotos aquí)
+            $query_update = "UPDATE usuarios SET nombre = '$nombre', email = '$email' WHERE id = $usuario_id";
 
-            $sql_foto_perfil = ""; // Fragmento SQL para actualizar la foto, vacío si no se sube ninguna
-
-            // Procesa la foto de perfil solo si se ha subido un archivo sin errores
-            if (isset($_FILES['foto_perfil']) && $_FILES['foto_perfil']['error'] === UPLOAD_ERR_OK) {
-                $file_tmp  = $_FILES['foto_perfil']['tmp_name'];
-                $file_name = $_FILES['foto_perfil']['name'];
-                $file_ext  = strtolower(pathinfo($file_name, PATHINFO_EXTENSION)); // Obtiene la extensión en minúsculas
-
-                $extensiones_permitidas = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
-
-                if (in_array($file_ext, $extensiones_permitidas)) {
-                    // Ruta absoluta a la carpeta donde se guardan las imágenes de perfil
-                    $carpeta_assets = dirname(__DIR__, 1) . "/assets/img/";
-
-                    // Crea la carpeta si no existe
-                    if (!file_exists($carpeta_assets)) {
-                        mkdir($carpeta_assets, 0777, true);
-                    }
-
-                    // Nombre único para el archivo: user_{id}_{timestamp}.{ext}
-                    $nuevo_nombre_archivo = "user_" . $usuario_id . "_" . time() . "." . $file_ext;
-                    $directorio_destino   = $carpeta_assets . $nuevo_nombre_archivo;
-
-                    // Mueve el archivo temporal al destino final
-                    if (move_uploaded_file($file_tmp, $directorio_destino)) {
-                        $sql_foto_perfil = ", foto_perfil = '$nuevo_nombre_archivo'"; // Añade la foto al UPDATE
-                    } else {
-                        $mensaje_error = 'Hubo un error al guardar la imagen en el servidor.';
-                    }
-                } else {
-                    $mensaje_error = 'Formato de imagen no válido. Usa JPG, PNG, GIF o WEBP.';
-                }
-            }
-
-            // Solo actualiza si no hubo errores con la imagen
-            if (empty($mensaje_error)) {
-                $query_update = "UPDATE usuarios SET nombre = '$nombre', email = '$email' $sql_foto_perfil WHERE id = $usuario_id";
-
-                if (mysqli_query($conexion, $query_update)) {
-                    $_SESSION['usuario_nombre'] = $nombre; // Actualiza el nombre en sesión
-                    $mensaje_exito = 'Perfil actualizado correctamente.';
-
-                    // Si se subió foto nueva, actualiza también la sesión
-                    if (!empty($sql_foto_perfil)) {
-                        $_SESSION['usuario_foto'] = $nuevo_nombre_archivo;
-                    }
-                } else {
-                    $mensaje_error = 'Error al actualizar los datos en la base de datos.';
-                }
+            if (mysqli_query($conexion, $query_update)) {
+                $_SESSION['usuario_nombre'] = $nombre; // Actualiza el nombre en la sesión
+                $mensaje_exito = 'Perfil actualizado correctamente.';
+            } else {
+                $mensaje_error = 'Error al actualizar los datos en la base de datos.';
             }
         }
     }
@@ -335,9 +294,7 @@ mysqli_close($conexion); // Cierra la conexión a la base de datos
                     </div>
                 </div>
 
-                <!-- Formulario de edición del perfil (oculto por defecto, JS lo muestra) -->
                 <div class="profile-body" id="editMode" style="display:none;">
-                    <!-- enctype necesario para poder subir archivos (foto de perfil) -->
                     <form method="POST" action="profile.php" enctype="multipart/form-data">
                         <input type="hidden" name="accion" value="editar">
 
@@ -366,7 +323,6 @@ mysqli_close($conexion); // Cierra la conexión a la base de datos
 
                         <div class="profile-actions">
                             <button type="submit" class="btn-edit">Guardar cambios</button>
-                            <!-- Cancela la edición volviendo a viewMode sin recargar la página -->
                             <button type="button" class="btn-delete" onclick="cerrarEdicion()">Cancelar</button>
                         </div>
                     </form>
@@ -376,12 +332,10 @@ mysqli_close($conexion); // Cierra la conexión a la base de datos
         </main>
     </div>
 
-    <!-- Modal de confirmación para eliminar la cuenta -->
     <div class="modal-overlay" id="modalEliminar">
         <div class="modal-box">
             <h3><i class="ri-error-warning-line"></i> ¿Eliminar cuenta?</h3>
             <p>Esta acción es <strong>irreversible</strong>. Se eliminarán todos tus datos y eventos de Agendify.</p>
-            <!-- El campo oculto indica al POST que ejecute la lógica de eliminar -->
             <form method="POST" action="profile.php">
                 <input type="hidden" name="accion" value="eliminar">
                 <div class="modal-actions">
