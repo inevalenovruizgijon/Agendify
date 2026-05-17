@@ -1,32 +1,36 @@
 <?php
-session_start();
+session_start(); // Inicia la sesión para acceder a los datos del usuario
 
+// Si el usuario no ha iniciado sesión, lo redirige al login
 if (!isset($_SESSION['usuario_id'])) {
     header("Location: index.php");
     exit();
 }
 
-require_once '../../backend/config/conexion.php';
+require_once '../../backend/config/conexion.php'; // Carga la conexión a la base de datos
 
-$usuario_id = $_SESSION['usuario_id'];
+$usuario_id = $_SESSION['usuario_id']; // Guarda el ID del usuario en sesión
 
-// ── Obtener actividades para el calendario ──
+// Obtiene todas las actividades del usuario ordenadas por fecha y hora
 $res = mysqli_query($conexion,
      "SELECT id, fecha, hora, titulo, prioridad FROM actividades
      WHERE usuario_id = $usuario_id
      ORDER BY fecha ASC, hora ASC"
 );
+
+// Construye un array con los datos de cada actividad para pasarlos al JS
 $actividades_json = [];
 while ($row = mysqli_fetch_assoc($res)) {
     $actividades_json[] = [
-        'id'        => (int)$row['id'],
-    'fecha'     => $row['fecha'],
-    'hora'      => $row['hora'],
-    'titulo'    => htmlspecialchars($row['titulo']),
-    'prioridad' => $row['prioridad'],
+        'id'        => (int)$row['id'],               // Casteo a entero por seguridad
+        'fecha'     => $row['fecha'],
+        'hora'      => $row['hora'],
+        'titulo'    => htmlspecialchars($row['titulo']), // Escapa el título para evitar XSS
+        'prioridad' => $row['prioridad'],
     ];
 }
-mysqli_close($conexion);
+
+mysqli_close($conexion); // Cierra la conexión a la base de datos
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -38,6 +42,7 @@ mysqli_close($conexion);
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/calendar.css">
     <link rel="stylesheet" href="../css/sidebar.css">
+    <link rel="icon" type="image/png" href="../assets/img/logoFavicon.png">
 </head>
 
 <body class="calendar-page">
@@ -69,6 +74,7 @@ mysqli_close($conexion);
             <p>© 2026 Agendify Team</p>
         </div>
     </aside>
+
     <main class="calendar-main">
         
         <header class="calendar-header">
@@ -93,7 +99,8 @@ mysqli_close($conexion);
 
         <section class="calendar-container">
             <div class="calendar-grid" id="calendarGrid">
-                </div>
+                <!-- El calendario se genera dinámicamente desde calendar.js -->
+            </div>
         </section>
 
         <footer class="calendar-footer">
@@ -102,43 +109,71 @@ mysqli_close($conexion);
             </a>
         </footer>
     </main>
+
+    <!-- Modal para crear un nuevo evento -->
     <div class="modal-overlay" id="eventModal">
     <div class="modal-card event-card">
         <div class="event-modal-header">
-            <h2>Nuevo evento</h2>
+            <h2><i class="ri-add-circle-line"></i> Nuevo evento</h2>
             <button class="close-modal" id="closeEventModal"><i class="ri-close-circle-line"></i></button>
         </div>
-        
-        <form class="event-form" id="newEventForm">
+
+        <!-- method, action y name añadidos para que el POST funcione -->
+        <form class="event-form" method="POST" action="actividades.php" id="newEventForm">
+            <input type="hidden" name="accion" value="crear">
+
             <div class="input-group">
-                <label>Título *</label>
-                <input type="text" placeholder="Nombre del evento" required>
+                <label><i class="ri-text"></i> Título *</label>
+                <input type="text" name="titulo" placeholder="Nombre del evento" required>
             </div>
 
             <div class="input-row">
                 <div class="input-group">
-                    <label>Fecha *</label>
-                    <input type="date" required>
+                    <label><i class="ri-calendar-line"></i> Fecha *</label>
+                    <input type="date" name="fecha" required>
                 </div>
                 <div class="input-group">
-                    <label>Hora *</label>
-                    <input type="time" required>
+                    <label><i class="ri-time-line"></i> Hora *</label>
+                    <input type="time" name="hora" required>
                 </div>
             </div>
 
             <div class="input-group">
-                <label>Descripción</label>
-                <textarea placeholder="Detalles del evento..." rows="4"></textarea>
+                <label><i class="ri-flag-line"></i> Prioridad</label>
+                <div class="prioridad-selector">
+                    <label class="prio-opt prio-baja">
+                        <input type="radio" name="prioridad" value="baja">
+                        <span><i class="ri-leaf-fill"></i> Baja</span>
+                    </label>
+                    <label class="prio-opt prio-media">
+                        <input type="radio" name="prioridad" value="media" checked>
+                        <span><i class="ri-flag-fill"></i> Media</span>
+                    </label>
+                    <label class="prio-opt prio-alta">
+                        <input type="radio" name="prioridad" value="alta">
+                        <span><i class="ri-alarm-warning-fill"></i> Alta</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label><i class="ri-file-text-line"></i> Descripción</label>
+                <textarea name="descripcion" placeholder="Detalles del evento..." rows="3"></textarea>
             </div>
 
             <div class="event-modal-actions">
-                <button type="submit" class="btn-create">Crear Evento</button>
+                <button type="submit" class="btn-create"><i class="ri-check-line"></i> Crear Evento</button>
                 <button type="button" class="btn-cancel" id="btnCancelEvent">Cancelar</button>
             </div>
         </form>
     </div>
 </div>
- <script>const ACTIVIDADES = <?= json_encode($actividades_json) ?>;</script>
-<script src="../js/calendar.js"></script>
+    <?php
+    // Convierte el array PHP a JSON y lo inyecta como variable global de JavaScript.
+    // Así calendar.js puede leer las actividades sin hacer peticiones adicionales al servidor.
+    ?>
+    <script>const ACTIVIDADES = <?= json_encode($actividades_json) ?>;</script>
+    <script src="../js/calendar.js"></script>
+    <script src="../js/nuevo-evento.js"></script>
 </body>
 </html>
