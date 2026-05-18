@@ -757,13 +757,23 @@ body.calendar-page {
         width: 100vw;
     }
 
+    .calendar-container {
+        border-radius: 16px;
+        padding: 8px;
+        flex: 1;
+    }
+
+    .calendar-grid {
+        height: 100%;
+    }
+    
     .calendar-header {
         flex-direction: column;
         align-items: stretch;
         gap: 12px;
         margin-bottom: 16px;
     }
-
+    
     .header-info {
         display: flex;
         flex-direction: row;
@@ -801,19 +811,9 @@ body.calendar-page {
         font-size: 1.5rem;
     }
 
-    .calendar-container {
-        border-radius: 16px;
-        padding: 8px;
-        flex: 1;
-    }
-
     .day-name {
         font-size: 0.7rem;
         padding: 6px 0;
-    }
-
-    .calendar-grid {
-        height: 100%;
     }
 
     .day {

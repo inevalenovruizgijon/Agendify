@@ -493,7 +493,7 @@ body.calendar-page {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 20px;
+        margin-bottom: 25px;
         flex-shrink: 0; 
     }
 
@@ -514,7 +514,7 @@ body.calendar-page {
     .activities-layout {
         display: flex !important;
         flex-direction: column !important;
-        gap: 24px !important;
+        gap: 45px !important;
         flex: 1 !important;
         overflow-y: auto !important; 
     }
