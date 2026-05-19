@@ -4,8 +4,6 @@ function configurarModal(queremosLogin) {
     const btnSubmit = document.getElementById('btnSubmit');
     const toggleBtn = document.getElementById('toggleAuth');
     const groupName = document.getElementById('groupName');
-    const alertBox = document.getElementById('authAlert');
-
     const footerQuestion = document.getElementById('footerQuestion');
 
     if (queremosLogin) {
@@ -13,19 +11,21 @@ function configurarModal(queremosLogin) {
         modalTitle.innerHTML = 'Bienvenido de <span>nuevo</span>';
         btnSubmit.innerText = 'Entrar a Agendify';
         toggleBtn.innerText = 'Regístrate';
-
         if (footerQuestion) footerQuestion.innerText = '¿No tienes cuenta?';
-
-        if (groupName) groupName.classList.add('d-none');
+        if (groupName) {
+            groupName.classList.add('d-none');
+            groupName.querySelector('input').removeAttribute('required');
+        }
     } else {
         authForm.action = '../../backend/auth/registro.php';
         modalTitle.innerHTML = 'Crea tu <span>cuenta</span>';
         btnSubmit.innerText = 'Crear cuenta gratis';
         toggleBtn.innerText = 'Inicia sesión';
-
         if (footerQuestion) footerQuestion.innerText = '¿Ya tienes cuenta?';
-
-        if (groupName) groupName.classList.remove('d-none');
+        if (groupName) {
+            groupName.classList.remove('d-none');
+            groupName.querySelector('input').setAttribute('required', '');
+        }
     }
 }
 
@@ -53,6 +53,56 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.remove('active');
     });
 
+    // Validación del formulario
+    document.getElementById('authForm')?.addEventListener('submit', (e) => {
+        const esLogin = btnSubmit.innerText === 'Entrar a Agendify';
+        const password = document.querySelector('input[name="password"]').value;
+        const nombre = document.querySelector('input[name="nombre"]').value;
+        const email = document.querySelector('input[name="email"]').value;
+
+        alertBox.classList.add('d-none');
+
+        // Validar email
+        if (!email) {
+            e.preventDefault();
+            alertText.innerText = "El email es obligatorio.";
+            alertBox.classList.remove('d-none');
+            return;
+        }
+
+        // Validar contraseña
+        if (password.length < 5) {
+            e.preventDefault();
+            alertText.innerText = "La contraseña debe tener mínimo 5 caracteres.";
+            alertBox.classList.remove('d-none');
+            return;
+        }
+
+        if (!/[a-zA-Z]/.test(password)) {
+            e.preventDefault();
+            alertText.innerText = "La contraseña debe contener al menos una letra.";
+            alertBox.classList.remove('d-none');
+            return;
+        }
+
+        // Validar nombre solo en registro
+        if (!esLogin) {
+            if (!nombre) {
+                e.preventDefault();
+                alertText.innerText = "El nombre es obligatorio.";
+                alertBox.classList.remove('d-none');
+                return;
+            }
+            if (nombre.length > 50) {
+                e.preventDefault();
+                alertText.innerText = "El nombre no puede tener más de 50 caracteres.";
+                alertBox.classList.remove('d-none');
+                return;
+            }
+        }
+    });
+
+    // Errores desde la URL
     const params = new URLSearchParams(window.location.search);
     const error = params.get('error');
 
@@ -60,29 +110,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (error && modal && alertBox && alertText) {
         setTimeout(() => {
-            // configuramos primero el tipo de modal
             if (error === 'auth') {
                 configurarModal(true);
                 alertText.innerText = "El usuario no existe.";
-            } else if (error === 'password') { 
-                configurarModal(true);        
-                alertText.innerText = "La contraseña introducida es incorrecta."; 
+            } else if (error === 'password') {
+                configurarModal(true);
+                alertText.innerText = "La contraseña introducida es incorrecta.";
             } else if (error === 'exists') {
                 configurarModal(false);
                 alertText.innerText = "Este correo ya está registrado.";
             }
 
-            // mostramos el modal y quitamos el d-none
             modal.classList.add('active');
-            alertBox.classList.remove('d-none'); 
-            
+            alertBox.classList.remove('d-none');
         }, 100);
     }
 
     document.getElementById('toggleAuth')?.addEventListener('click', (e) => {
-        e.preventDefault(); 
+        e.preventDefault();
         if (alertBox) alertBox.classList.add('d-none');
         const esLoginActual = btnSubmit.innerText === 'Entrar a Agendify';
-        configurarModal(!esLoginActual); 
+        configurarModal(!esLoginActual);
     });
 });

@@ -474,19 +474,42 @@ body.calendar-page {
 @media (max-width: 768px) {
 
     body.calendar-page {
-        overflow: hidden !important;
+        overflow: hidden; 
         display: flex;
         flex-direction: column;
-        height: 100vh;
+        height: 100dvh !important; /* <--- CAMBIO CLAVE: dynamic viewport height */
+        width: 100vw;
     }
 
     .calendar-main {
-        height: 100vh !important; 
-        display: flex !important;
-        flex-direction: column !important;
-        padding: 16px !important;
-        padding-bottom: 90px !important;
-        box-sizing: border-box;
+        padding: 16px 16px 0 16px !important;
+        height: calc(100dvh - 70px) !important; /* <--- Ajustado con dvh */
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden; 
+        margin-bottom: 60px;
+    }
+
+    .calendar-container {
+        background: var(--white);
+        border-radius: 16px;
+        padding: 8px;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0 !important;
+        max-height: calc(100% - 20px) !important; /* Deja un respiro estricto antes del menú */
+        margin-bottom: 20px !important; 
+        overflow: hidden;
+    }
+
+    .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-template-rows: auto repeat(5, minmax(0, 1fr)) !important; /* Evita celdas gigantes */
+        height: 100% !important;
+        width: 100%;
     }
 
     .calendar-header {
@@ -514,7 +537,7 @@ body.calendar-page {
     .activities-layout {
         display: flex !important;
         flex-direction: column !important;
-        gap: 45px !important;
+        gap: 42px !important;
         flex: 1 !important;
         overflow-y: auto !important; 
     }

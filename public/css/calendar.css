@@ -749,21 +749,48 @@ body.calendar-page {
         overflow: hidden; 
         display: flex;
         flex-direction: column;
-    }
-
-    .calendar-main {
-        padding: 16px 16px 85px 16px !important;
-        height: 100vh;
+        /* Forzamos a la pantalla a medir el alto dinámico real disponible en el móvil */
+        height: 100dvh !important; 
         width: 100vw;
     }
 
+    .calendar-main {
+        padding: 16px 16px 0 16px !important; /* Quitamos el padding-bottom de 85px que creaba espacio fantasma */
+        height: calc(100dvh - 70px) !important; /* Ocupa el alto dinámico disponible restando la barra de navegación */
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        overflow: hidden;
+    }
+
     .calendar-container {
+        background: var(--white);
         border-radius: 16px;
         padding: 8px;
         flex: 1;
+        display: flex;
+        flex-direction: column;
+        min-height: 0 !important; /* Permite que la caja se encoja si el buscador del móvil sube */
+        margin-bottom: 12px !important; /* Deja una pequeña separación estética antes de la barra oscura */
     }
 
     .calendar-grid {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        /* CAMBIO CLAVE: minmax(0, 1fr) obliga a las filas a reducir su tamaño de forma proporcional 
+           sin desbordar el contenedor blanco */
+        grid-template-rows: auto repeat(5, minmax(0, 1fr)) !important;
+        height: 100% !important;
+        width: 100%;
+    }
+    
+    .day {
+        padding: 4px 2px;
+        align-items: center;
+        justify-content: flex-start;
+        position: relative;
+        min-height: 0 !important; /* Eliminamos el min-height: 50px que provocaba que se pisaran */
         height: 100%;
     }
     
@@ -814,14 +841,6 @@ body.calendar-page {
     .day-name {
         font-size: 0.7rem;
         padding: 6px 0;
-    }
-
-    .day {
-        padding: 4px 2px;
-        align-items: center;
-        justify-content: flex-start;
-        position: relative;
-        min-height: 50px;
     }
 
     .ag-day-num {

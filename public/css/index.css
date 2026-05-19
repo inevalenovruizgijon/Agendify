@@ -364,11 +364,6 @@ body {
 
 
 
-.footer-pro {
-    background: var(--white);
-    padding: 40px;
-    border-top: 1px solid rgba(0,0,0,0.05);
-}
 
 .modal-form {
     display: flex;
@@ -385,6 +380,82 @@ body {
     opacity: 0.8;
 }
 
+.footer-pro {
+            background: var(--white);
+            padding: 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .f-logo { font-weight: 800; color: var(--dark); display: flex; align-items: center; gap: 8px; text-decoration: none; }
+        .f-logo i { color: var(--blue); }
+
+        .footer-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--blue); }
+
+        .footer-links a.active-link { color: var(--blue); }
+
+        .social-pills a {
+            color: var(--dark);
+            font-size: 1.3rem;
+            margin-left: 20px;
+            transition: 0.3s;
+        }
+
+        .social-pills a:hover { color: var(--blue); }
+
+        /* Contact banner */
+        .contact-banner {
+            background: var(--dark);
+            border-radius: 20px;
+            padding: 40px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .contact-banner h3 { font-size: 1.3rem; font-weight: 800; color: white; margin-bottom: 4px; }
+        .contact-banner p { color: rgba(255,255,255,0.5); font-size: 0.9rem; }
+
+        .contact-banner a {
+            text-decoration: none;
+            background: var(--blue);
+            color: white;
+            padding: 14px 30px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            transition: 0.3s;
+        }
+
+        .contact-banner a:hover { background: white; color: var(--dark); }
+
 #alertText {
     animation: fadeIn 0.3s ease;
 }
@@ -393,3 +464,39 @@ body {
     from { opacity: 0; transform: translateX(-5px); }
     to { opacity: 1; transform: translateX(0); }
 }      
+
+@media (max-width: 600px) {
+
+    .nav-container {
+        padding: 0 16px;
+    }
+
+    .brand-sub {
+        display: none;
+    }
+
+    .brand-name {
+        font-size: 1.1rem;
+    }
+
+    .logo-icon i {
+        font-size: 1.5rem;
+    }
+
+    .nav-auth {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .link-login {
+        margin-right: 0;
+        font-size: 0.85rem;
+    }
+
+    .btn-nav {
+        padding: 8px 14px;
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+}
